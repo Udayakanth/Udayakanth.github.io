@@ -1,0 +1,1 @@
+var CIRCLE_RADIUS = 70;
