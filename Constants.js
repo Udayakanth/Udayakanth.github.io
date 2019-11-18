@@ -1,1 +1,2 @@
 var CIRCLE_RADIUS = 70;
+var CIRCLE_SPEED = 5;

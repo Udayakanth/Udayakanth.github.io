@@ -1,9 +1,12 @@
 class GameManager {
   allCircles = [];
+  allTiles = [];
+  allTilesB = [];
 
   constructor() {
     console.log("Game Manager....");
-    this.test();
+    //this.test();
+    this.test2();
     createjs.Ticker.addEventListener("tick", this.ticker.bind(this));
   }
 
@@ -11,8 +14,37 @@ class GameManager {
     console.log("GM ticker...");
     //this.c1.update();
     for (let c = 0; c < 5; c++) {
-      this.allCircles[c].update();
+      //this.allCircles[c].update();
     }
+  }
+
+  test2() {
+    console.log("test 2");
+
+    let tileCount = 0;
+    //Arranging Tiles
+    for (let h = 0; h < 4; h++)
+      for (let c = 0; c < 4; c++) {
+        this.allTiles.push(new Tile());
+        this.allTiles[tileCount].init(5 + 50 * c, 15 + h * 25, 70, 40);
+        this.allTiles[tileCount].shadow = new createjs.Shadow(
+          "#000000",
+          5,
+          5,
+          10
+        );
+
+        this.allTilesB.push(new Tile());
+        this.allTilesB[tileCount].init(5 + 50 * c, 190 + h * 25, 70, 40);
+        this.allTilesB[tileCount].shadow = new createjs.Shadow(
+          "#000000",
+          5,
+          5,
+          10
+        );
+
+        tileCount++;
+      }
   }
 
   test() {
@@ -23,7 +55,12 @@ class GameManager {
         2.5 * c * CIRCLE_RADIUS,
         CIRCLE_RADIUS * 0.5 * (1 + Math.random())
       );
+      this.allCircles[c].shadow = new createjs.Shadow("#000000", 5, 5, 10);
+      this.allTiles.push(new Tile());
+      this.allTiles[c].init(50 * c, 259, 40, 40);
+      this.allTiles[c].shadow = new createjs.Shadow("#000000", 5, 5, 10);
     }
+
     /*
     var roundedRectTest = new createjs.Shape();
     var x = 40,
