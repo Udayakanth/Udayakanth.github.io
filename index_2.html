@@ -1,1 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson 2 </title>
+</head>
+<body>   
 
+  <div id="shopping-list">   <!-- Mount Point -->
+    <!-- <h1>{{header.toUpperCase()}} </h1> -->
+    <!-- <h1>{{header? header: 'Welcome'}} </h1> -->
+    <h1>{{header || "Welcome"}}</h1>
+    <input v-model="header">
+    <h4>Shopping Item Lists</h4>
+    <ul> <!-- Normal "ul" un ordered list @STEP-1 -->
+      <li v-for="item in items" :key="item.id">{{item.label}}</li> <!-- @STEP-2 -->
+      <br>
+      <li v-for="{id, label} in items" :key="id">{{label}}</li> <!-- @STEP-2 -->
+      <br>
+      <li v-for="(item, index) in items" :key="item.id">{{index + " - "}}{{item.label}}</li> <!--@STEP-2 -->
+      <br>
+      <li v-for="({id, label}, index) in items" :key="id">{{index + " - "}}{{label}}</li> <!-- @STEP-2 -->
+      <br>
+      <h4>Dictionary Usage</h4>
+      <li v-for="(item, key) in items_dict" :key="item.id">{{key + " - "}} {{item.label}}</li>
+    </ul>
+  </div>
+
+
+  <script src="https://unpkg.com/vue@3"></script>
+  <script>
+    const shoppingList = Vue.createApp({
+      data()
+      {
+        return{
+          header:"Shopping List App!",
+          items : [ 
+            {id:1, label: "10 party hats"}, 
+            {id:2, label: "10 plates"},
+            {id:3, label: "1 Cake"},
+            {id:4, label: "1 Packet Chocolates"}
+          ], // @STEP-0 -->,
+          items_dict : { 
+            'item-1': {id:1, label: "10 party hats"}, 
+            'item-2': {id:2, label: "10 plates"},
+            'item-3': {id:3, label: "1 Cake"},
+            'item-4': {id:4, label: "1 Packet Chocolates"}
+          }
+        }        
+      }
+    }).mount('#shopping-list') 
+  </script>
+</body>
+</html>
+
+<!-- Summary of lesson 4 
+ 1) search : @STEP-0 | items : ["10 party hats", "10 plates", "1 Cake", "1 Packet Chocolates"]   
+ 2) search : @STEP-1 | Normal "ul" un ordered list to render
+ 3) search : @STEP-2 | <li v-for="item in items">{{item}}</li> // v-for="item in items"
+ 4) note : use key if you have unique-id : https://vueschool.io/articles/vuejs-tutorials/tips-and-gotchas-for-using-key-with-v-for-in-vue-js-3/
+ 5) Least Priority : https://eslint.vuejs.org/user-guide/ | eslint for vue js
+ 6) Different ways to use array item 
+ 7) Importance of 'key' in array and dictionary 
+ 8) How to use dictionary
+ -->
