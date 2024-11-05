@@ -1,78 +1,487 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TB-3 : Load JSON Files</title>
-    <script src="https://unpkg.com/vue@3"></script>
-    <style>
-        /* Add any styles you want here */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Lesson 11 </title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+
+    .level-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .level {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      margin: 16px 0;
+      background-color: #f9f9f9;
+    }
+
+    .section {
+      margin-bottom: 16px;
+    }
+
+    .field {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    label {
+      flex: 1;
+    }
+
+    input[type="range"],
+    input[type="number"],
+    textarea {
+      flex: 2;
+      margin-left: 8px;
+    }
+  </style>
 </head>
+
 <body>
 
-<div id="app">
-    <button @click="selectFiles">Load JSON Files</button>
-    <input type="file" ref="fileInput" @change="handleFiles" multiple accept=".json" style="display: none;" />
-    
-    <label for="json-files">Select a JSON File:</label>
-    <select id="json-files" v-model="selectedFile">
-        <option v-for="file in jsonFiles" :key="file.name" :value="file.name">
-            {{ file.name }}
-        </option>
-    </select>
+  <div id="app">
+    <div class="level-container">
+      <h1>Game Levels Configuration</h1>
+      <!-- <button @:click="showAlert" class="btn-primary">Show Alert</button> -->
+      <button @:click="download_json_file" class="btn-primary">Download JSON</button>
+      <div v-for="(level, index) in levels" :key="index" class="level">
+        <!-- <h2>Level {{ level.level.levelIndex }}</h2> In-Batch2 -->
+        <div class="section">
+          <h3>Player Settings</h3>
+          <label> Play Mode
+            <select v-model="level.player.play_mode">
+              <option value="normal">Normal</option>
+              <option value="god_mode">God Mode</option>
+            </select>
+          </label>
+          <br>
+          <br>
+          <div class="field">
+            <label>Health:</label>
+            <input type="range" v-model="level.player.health" min="0" max="100" step="1" />
+            <span>{{ level.player.health }}</span>
+          </div>
+          <div class="field">
+            <label>Turn Speed:</label>
+            <input type="range" v-model="level.player.turn_speed" min="0" max="100" step="0.1" />
+            <span>{{ level.player.turn_speed }}</span>
+          </div>
+          <div class="field">
+            <label>Forward Speed:</label>
+            <input type="range" v-model="level.player.forward_speed" min="0" max="300" step="0.1" />
+            <span>{{ level.player.forward_speed }}</span>
+          </div>
+        </div>
 
-    <div v-if="jsonData">
-        <h3>Contents of {{ selectedFile }}:</h3>
-        <pre>{{ jsonData }}</pre>
+        <div class="section">
+          <h3>Player Weapon Settings</h3>
+          <div class="field">
+            <label>Shooting Range:</label>
+            <input type="range" v-model="level.player.weapon.shooting_range" min="0" max="100" />
+            <span>{{ level.player.weapon.shooting_range }}</span>
+          </div>
+          <div class="field">
+            <label>Reload in Seconds:</label>
+            <input type="range" v-model="level.player.weapon.reload_in_seconds" min="0" max="100" step="0.1" />
+            <span>{{ level.player.weapon.reload_in_seconds }}</span>
+          </div>
+          <div class="field">
+            <label>Fire Rate Per Minute:</label>
+            <input type="range" v-model="level.player.weapon.fire_rate_per_min" min="0" max="300" step="0.1" />
+            <span>{{ level.player.weapon.fire_rate_per_min }}</span>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Player Bullet Settings</h3>
+          <div class="field">
+            <label>Speed:</label>
+            <input type="range" v-model="level.player.bullet.speed" min="0" max="100" />
+            <span>{{ level.player.bullet.speed }}</span>
+          </div>
+          <div class="field">
+            <label>Damage Crate:</label>
+            <input type="range" v-model="level.player.bullet.damage.crate" min="0" max="100" step="0.1" />
+            <span>{{ level.player.bullet.damage.crate }}</span>
+          </div>
+          <div class="field">
+            <label>Damage Enemy:</label>
+            <input type="range" v-model="level.player.bullet.damage.enemy" min="0" max="300" step="0.1" />
+            <span>{{ level.player.bullet.damage.enemy }}</span>
+          </div>
+        </div>
+        <div class="section">
+          <h3>Player Bomb Drop Settings</h3>
+          <div class="field">
+            <label>Blast Radius:</label>
+            <input type="range" v-model="level.bomb.blastRadius" min="0" max="50" step="0.1" />
+            <span>{{ level.bomb.blastRadius }}</span>
+          </div>
+          <div class="field">
+            <label>Countdown to Explosion:</label>
+            <input type="range" v-model="level.bomb.countdown_to_explosion" min="0" max="60" step="0.1" />
+            <span>{{ level.bomb.countdown_to_explosion }}</span>
+          </div>
+          <div class="field">
+            <label>Max Bomb Count:</label>
+            <input type="range" v-model="level.bomb.max_bomb_count" min="0" max="20" />
+            <span>{{ level.bomb.max_bomb_count }}</span>
+          </div>
+        </div>
+        <hr>
+        <div class="section">
+          <h3>Enemy Settings</h3>
+          <div class="field">
+            <label>Health:</label>
+            <input type="range" v-model="level.enemy.health" min="0" max="100" step="1" />
+            <span>{{ level.enemy.health }}</span>
+          </div>
+          <div class="field">
+            <label>Turn Speed:</label>
+            <input type="range" v-model="level.enemy.turn_speed" min="0" max="100" step="0.1" />
+            <span>{{ level.enemy.turn_speed }}</span>
+          </div>
+          <div class="field">
+            <label>Forward Speed:</label>
+            <input type="range" v-model="level.enemy.forward_speed" min="0" max="300" step="0.1" />
+            <span>{{ level.enemy.forward_speed }}</span>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Enemy Weapon Settings</h3>
+          <div class="field">
+            <label>Shooting Range:</label>
+            <input type="range" v-model="level.enemy.weapon.shooting_range" min="0" max="100" />
+            <span>{{ level.enemy.weapon.shooting_range }}</span>
+          </div>
+          <div class="field">
+            <label>Reload in Seconds:</label>
+            <input type="range" v-model="level.enemy.weapon.reload_in_seconds" min="0" max="100" step="0.1" />
+            <span>{{ level.enemy.weapon.reload_in_seconds }}</span>
+          </div>
+          <div class="field">
+            <label>Fire Rate Per Minute:</label>
+            <input type="range" v-model="level.enemy.weapon.fire_rate_per_min" min="0" max="300" step="0.1" />
+            <span>{{ level.enemy.weapon.fire_rate_per_min }}</span>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Enemy Bullet Settings</h3>
+          <div class="field">
+            <label>Speed:</label>
+            <input type="range" v-model="level.enemy.bullet.speed" min="0" max="100" />
+            <span>{{ level.enemy.bullet.speed }}</span>
+          </div>
+          <div class="field">
+            <label>Damage Crate:</label>
+            <input type="range" v-model="level.enemy.bullet.damage.crate" min="0" max="100" step="0.1" />
+            <span>{{ level.enemy.bullet.damage.crate }}</span>
+          </div>
+          <div class="field">
+            <label>Damage Enemy:</label>
+            <input type="range" v-model="level.enemy.bullet.damage.enemy" min="0" max="300" step="0.1" />
+            <span>{{ level.enemy.bullet.damage.enemy }}</span>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="section">
+          <h3>Missiles: Settings</h3>
+          <div class="field">
+            <label>Health:</label>
+            <input type="range" v-model="level.missile.health" min="0" max="100" />
+            <span>{{ level.missile.health }}</span>
+          </div>
+          <div class="field">
+            <label>Countdown To Launch</label>
+            <input type="range" v-model="level.missile.countdown_to_launch" min="0" max="100" step="0.1" />
+            <span>{{ level.missile.countdown_to_launch }}</span>
+          </div>
+          <div class="field">
+            <label>Max Count:</label>
+            <input type="range" v-model="level.missile.max_count" min="0" max="300" step="0.1" />
+            <span>{{ level.missile.max_count }}</span>
+          </div>
+        </div>
+
+        <hr>
+        
+        <div class="section">
+          <h3>Camera Settings</h3>
+          <div class="field">
+            <label>FOV:</label>
+            <input type="range" v-model="level.camera.fov" min="0" max="100" />
+            <span>{{ level.camera.fov }}</span>
+          </div>
+          <div class="field">
+            <label>Position X:</label>
+            <input type="number" v-model="level.camera.position[0]" />
+          </div>
+          <div class="field">
+            <label>Position Y:</label>
+            <input type="number" v-model="level.camera.position[1]" />
+          </div>
+          <div class="field">
+            <label>Position Z:</label>
+            <input type="number" v-model="level.camera.position[2]" />
+          </div>
+        </div>
+
+        <hr>
+        <div class="section">
+          <h3>Level Settings</h3>
+          <div class="field">
+            <label>Max Height:</label>
+            <input type="range" v-model="level.level_details.max_height" min="10" max="100" />
+            <span>{{ level.level_details.max_height }}</span>
+          </div>
+          <div class="field">
+            <label>Left Limit:</label>
+            <input type="number" v-model="level.level_details.left_limit_x" />
+          </div>
+          <div class="field">
+            <label>Right Limit:</label>
+            <input type="number" v-model="level.level_details.right_limit_x" />
+          </div>
+
+          <div class="field">
+            <label>Level Name:</label>
+            <input type="text" placeholder="Level Name" required v-model="level.level_details.name" />
+          </div>
+          <div>
+          <label> Difficulty Mode
+            <select v-model="level.level_details.difficulty">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>              
+            </select>
+          </label>
+          </div>
+        </div>
+          
+
+        </div>
+
+
+
+
+        <!-- Taking up this in batch-2 
+        <div class="section">
+          <h3>Level Objectives</h3>
+          <textarea v-model="level.level.objective.join('\n')" rows="4"></textarea>
+        </div>
+
+        <div class="section">
+          <h3>Level Rewards</h3>
+          <div class="field">
+            <label>Coins:</label>
+            <input type="number" v-model="level.level.reward.coins" />
+          </div>
+          <div class="field">
+            <label>Gems:</label>
+            <input type="number" v-model="level.level.reward.gems" />
+          </div>
+        </div>
+        <div class="section">
+          <h3>Play Mode To-Do</h3>
+        </div>
+        -->
+
+      </div>
     </div>
-</div>
+  </div>
 
-<script>
-const app = Vue.createApp({
-    data() {
+  <script src="https://unpkg.com/vue@3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    const level_data = Vue.createApp({
+      data() {
         return {
-            jsonFiles: [],
-            selectedFile: '',
-            jsonData: null,
-        };
-    },
-    methods: {
-        selectFiles() {
-            this.$refs.fileInput.click();
-        },
-        handleFiles(event) {
-            const files = event.target.files;
-            this.jsonFiles = Array.from(files); // Convert FileList to Array
-        },
-        loadJsonData(file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                try {
-                    this.jsonData = JSON.parse(e.target.result);
-                } catch (error) {
-                    console.error('Error parsing JSON:', error);
+          "levels": [
+            {
+              "player": {
+                "health": 100,
+                "turn_speed": 30.6,
+                "forward_speed": 200.6,
+                "weapon": {
+                  "shooting_range": 100.0,
+                  "reload_in_seconds": 4.0,
+                  "fire_rate_per_min": 5.0
+                },
+                "bullet": {
+                  "speed": 100.0,
+                  "damage": {
+                    "crate": 3.0,
+                    "enemy": 6.0
+                  }
+                },
+                "play_mode": "normal"
+              },
+              "enemy": {
+                "health": 100,
+                "turn_speed": 30.6,
+                "forward_speed": 200.6,
+                "weapon": {
+                  "shooting_range": 100.0,
+                  "reload_in_seconds": 4.0,
+                  "fire_rate_per_min": 5.0
+                },
+                "bullet": {
+                  "speed": 100.0,
+                  "damage": {
+                    "crate": 3.0,
+                    "enemy": 6.0
+                  }
                 }
-            };
-            reader.readAsText(file);
-        },
-    },
-    watch: {
-        selectedFile() {
-            const file = this.jsonFiles.find(f => f.name === this.selectedFile);
-            if (file) {
-                this.loadJsonData(file);
+              },
+              "bomb": {
+                "blastRadius": 10.0,
+                "countdown_to_explosion": 10.0,
+                "max_bomb_count": 10
+              },
+              "missile": {
+                "health": 100,
+                "countdown_to_launch": 50,
+                "max_count": 5
+              },
+              "camera": {
+                "fov": 50,
+                "position": [10.5, 45.6, -45.0]
+              },
+              "level_details": {
+                "level_id": "level_?",
+                "name": "Mystic Forest",
+                "left_limit_x": -1000,
+                "right_limit_x": 1000,
+                "max_height": 50,
+                "difficulty": "medium"
+              } /* Taking the below section in Batch-2 ,
+              level: {
+                levelIndex: 1,
+                objective: [
+                  "Collect 10 coins",
+                  "Destroy All Enemies",
+                  "Complete Level in 5 min"
+                ],
+                reward: {
+                  coins: 50,
+                  gems: 100,
+                }
+              } */
             }
+          ]
+        }
+      },
+      methods: {
+        showAlert() {
+          Swal.fire({
+            title: 'Error!',
+            text: 'Do you want to continue',
+            icon: 'error',
+            confirmButtonText: 'Cool'
+          })
+        }
+        ,
+        toFloat(value) {
+          return Number(value);
         },
-    },
-});
 
-app.mount('#app');
-</script>
+        toInt(value) {
+          return Math.floor(value);
+        },
 
+        download_json_file() {
+          const player = this.levels[0].player;
+          //{
+          //player.play_mode = player.play_mode
+          player.health = this.toFloat(player.health)
+          player.forward_speed = this.toFloat(player.forward_speed)
+          player.turn_speed = this.toFloat(player.turn_speed)
+          player.weapon.shooting_range = this.toFloat(player.weapon.shooting_range)
+          player.weapon.reload_in_seconds = this.toFloat(player.weapon.reload_in_seconds)
+          player.weapon.fire_rate_per_min = this.toFloat(player.weapon.fire_rate_per_min);
+          player.bullet.speed = this.toFloat(player.bullet.speed);
+          player.bullet.damage.crate = this.toFloat(player.bullet.damage.crate);
+          player.bullet.damage.enemy = this.toFloat(player.bullet.damage.enemy);
+          //}
+          this.levels[0].player = player;
+
+          const enemy = this.levels[0].enemy;
+          //{
+          enemy.health = this.toFloat(enemy.health)
+          enemy.forward_speed = this.toFloat(enemy.forward_speed)
+          enemy.turn_speed = this.toFloat(enemy.turn_speed)
+          enemy.weapon.shooting_range = this.toFloat(enemy.weapon.shooting_range)
+          enemy.weapon.reload_in_seconds = this.toFloat(enemy.weapon.reload_in_seconds)
+          enemy.weapon.fire_rate_per_min = this.toFloat(enemy.weapon.fire_rate_per_min);
+          enemy.bullet.speed = this.toFloat(enemy.bullet.speed);
+          enemy.bullet.damage.crate = this.toFloat(enemy.bullet.damage.crate);
+          enemy.bullet.damage.enemy = this.toFloat(enemy.bullet.damage.enemy);
+          //}
+          this.levels[0].enemy = enemy;
+
+          const bomb = this.levels[0].bomb;
+          //{
+          bomb.blastRadius = this.toFloat(bomb.blastRadius)
+          bomb.countdown_to_explosion = this.toFloat(bomb.countdown_to_explosion)
+          bomb.max_bomb_count = this.toInt(bomb.max_bomb_count)
+          //}
+          this.levels[0].bomb = bomb;
+
+          const missile = this.levels[0].missile;
+          //{
+          missile.health = this.toFloat(missile.health)
+          missile.countdown_to_launch = this.toFloat(missile.countdown_to_launch)
+          missile.max_count = this.toInt(missile.max_count)
+          //}
+          this.levels[0].missile = missile;
+
+          const camera = this.levels[0].camera;
+
+          camera.fov = this.toFloat(camera.fov)
+          camera.position[0] = this.toFloat(camera.position[0])
+          camera.position[1] = this.toFloat(camera.position[1])
+          camera.position[2] = this.toFloat(camera.position[2])
+
+          this.levels[0].missile = missile;
+
+
+
+          const jsonString = JSON.stringify(this.levels, null, 2);
+          const blob = new Blob([jsonString], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'current_level_.json';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }
+      }
+    }).mount('#app');
+  </script>
 </body>
+
 </html>
