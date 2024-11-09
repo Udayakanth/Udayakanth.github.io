@@ -57,13 +57,25 @@
 
     .checked label {
       background-color: #d4edda;
-      /* Green background */
+      /* Green background for checked items */
       color: green;
-      /* Green text */
+      /* Green text for checked items */
+    }
+
+    .locked label {
+      background-color: #d4edda;
+      /* Green background for locked items */
+      color: green;
+      /* Green text for locked items */
     }
 
     .checkbox-item input {
       margin-right: 10px;
+    }
+
+    .locked input {
+      pointer-events: none;
+      /* Disable input for locked items */
     }
   </style>
 </head>
@@ -92,16 +104,23 @@
     <div class="tab-content">
       <div v-if="activeTab === 1">
         <h3>Required Resources</h3>
-        <ul>
-          <li v-for="(item, index) in resources" :key="item.id" class="checkbox-item"
-            :class="{ checked: item.checked }">
-            <input type="checkbox" :id="item.id" v-model="item.checked" @change="moveToLast(index)" />
-            <label :for="item.id">
-              <span>{{ item.name }}</span>
-            </label>
-          </li>
-        </ul>
+
+        <div v-for="(resources, location) in groupedResources" :key="location">
+          <h4>{{ location }}</h4>
+          <ul>
+            <li v-for="(item, index) in resources" :key="item.id" class="checkbox-item"
+              :class="{ checked: item.checked, locked: item.locked }">
+              <input type="checkbox" :id="item.id" v-model="item.checked"
+                @change="moveToLastInLocation(index, location)" :disabled="item.locked" 
+              />
+              <label :for="item.id">
+                <span>{{ item.name }}</span>
+              </label>
+            </li>
+          </ul>
+        </div>
       </div>
+
       <div v-if="activeTab === 2">
         <h3>Tab 2 Content</h3>
         <p>Content for Tab 2 goes here.</p>
@@ -130,6 +149,7 @@
         };
       },
       created() {
+        localStorage.clear();
         // Check if data exists in localStorage when the component is created
         const savedResources = localStorage.getItem('resources');
         if (savedResources) {
@@ -138,23 +158,37 @@
         } else {
           // Default data if nothing is saved in localStorage
           this.resources = [
-            { id: 1, name: "Copper Mug", checked: false },
-            { id: 2, name: "1 Lemon to wash copper pots", checked: false },
-            { id: 3, name: "White cloths to dry copper vessels", checked: false },
-            { id: 4, name: "Cotton Kerchiefs for program", checked: false },
-            { id: 5, name: "Tamarind", checked: false },
-            { id: 6, name: "Rubber band", checked: false },
-            { id: 7, name: "Wooden Tray (Optional)", checked: false },
-            { id: 8, name: "Additional normal white kerchiefs to open the bhumi and earth container", checked: false },
-            { id: 9, name: "Piece of paper with 'Month Program Name + Total Participants Count + Spot Registration Count", checked: false },
-            { id: 10, name: "Attendance Sheet PDF", checked: false },
-            { id: 12, name: "Get Locker passcode", checked: false },
-            { id: 11, name: "Buy Sugandha Raja Flowers", checked: false },
-            // { id: 13, name: "Buy Sugandha Raja Flowers", checked: false },
-            // { id: 14, name: "Buy Sugandha Raja Flowers", checked: false },
-            // { id: 15, name: "Buy Sugandha Raja Flowers", checked: false }
+            { id: 1, name: "Copper Mug", checked: false, location: "Home" },
+            { id: 2, name: "1 Lemon to wash copper pots", checked: false, location: "Home" },
+            { id: 3, name: "White cloths to dry copper vessels", checked: false, location: "Home" },
+            { id: 4, name: "Cotton Kerchiefs for program", checked: false, location: "Home" },
+            { id: 5, name: "Tamarind", checked: false, location: "Home" },
+            { id: 6, name: "Rubber band", checked: false, location: "Home" },
+            { id: 7, name: "Wooden Tray (Optional)", checked: false, location: "Home" },
+            { id: 8, name: "Additional normal white kerchiefs to open the bhumi and earth container", checked: false, location: "Home" },
+            { id: 9, name: "Piece of paper with 'Month Program Name + Total Participants Count + Spot Registration Count", checked: false, location: "Home" },
+            { id: 10, name: "Attendance Sheet PDF", checked: false, location: "Home" },
+            { id: 16, name: "Attendance Sheet Printout", checked: false, location: "Xerox Shop" },
+            { id: 12, name: "Get Locker passcode", checked: false, location: "Home" },
+            { id: 11, name: "Buy Sugandha Raja Flowers", checked: false, location: "Market" },
+            // { id: 13, name: "Buy Sugandha Raja Flowers", checked: false , location: "Home"},
+            // { id: 14, name: "Buy Sugandha Raja Flowers", checked: false , location: "Home"},
+            // { id: 15, name: "Buy Sugandha Raja Flowers", checked: false, location: "Home" }
           ];
         }
+        console.log(this.resources); // Debugging to ensure data is loaded correctly
+      },
+      computed: {
+        // Group resources by location
+        groupedResources() {
+          return this.resources.reduce((groups, resource) => {
+            if (!groups[resource.location]) {
+              groups[resource.location] = [];
+            }
+            groups[resource.location].push(resource);
+            return groups;
+          }, {});
+        },
       },
       watch: {
         // Watch for changes in the `resources` array and save to localStorage
@@ -163,12 +197,28 @@
         }
       },
       methods: {
-        moveToLast(index) {
-          const item = this.resources[index];
-          if (item.checked) {
-            // Move checked item to the end of the list
-            this.resources.splice(index, 1);
-            this.resources.push(item);
+        moveToLastInLocation(index, location) {
+          // Find the resource in the specific location
+          const resource = this.resources[index];
+
+          if (resource.checked && !resource.locked) {
+            // Get the group for the given location
+            const locationResources = this.resources.filter(r => r.location === location);
+
+            // Sort the location resources so that checked items come last
+            const sortedResources = [
+              ...locationResources.filter(r => !r.checked),
+              ...locationResources.filter(r => r.checked)
+            ];
+
+            // Reassign sorted list to the original resources for that location
+            this.resources = this.resources.map(r => {
+              if (r.location === location) {
+                const sortedResource = sortedResources.find(sr => sr.id === r.id);
+                return sortedResource ? sortedResource : r;
+              }
+              return r;
+            });
           }
         },
       },
