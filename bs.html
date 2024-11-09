@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue 3 Tabs with Checkbox List</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    .tab {
+      margin-right: 20px;
+      padding: 10px 20px;
+      background-color: #f1f1f1;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .tab.active {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .tab-content {
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    ul {
+      padding-left: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .checkbox-item {
+      padding: 5px 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .checkbox-item label {
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      display: inline-block;
+    }
+
+    .checked label {
+      background-color: #d4edda;
+      /* Green background */
+      color: green;
+      /* Green text */
+    }
+
+    .checkbox-item input {
+      margin-right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <div class="tabs">
+      <div class="tab" :class="{ active: activeTab === 1 }" @click="activeTab = 1">
+        Required Resources
+      </div>
+      <div class="tab" :class="{ active: activeTab === 2 }" @click="activeTab = 2">
+        Tab 2
+      </div>
+      <div class="tab" :class="{ active: activeTab === 3 }" @click="activeTab = 3">
+        Tab 3
+      </div>
+      <div class="tab" :class="{ active: activeTab === 4 }" @click="activeTab = 4">
+        Tab 4
+      </div>
+      <div class="tab" :class="{ active: activeTab === 5 }" @click="activeTab = 5">
+        Tab 5
+      </div>
+    </div>
+
+    <div class="tab-content">
+      <div v-if="activeTab === 1">
+        <h3>Required Resources</h3>
+        <ul>
+          <li v-for="(item, index) in resources" :key="item.id" class="checkbox-item"
+            :class="{ checked: item.checked }">
+            <input type="checkbox" :id="item.id" v-model="item.checked" @change="moveToLast(index)" />
+            <label :for="item.id">
+              <span>{{ item.name }}</span>
+            </label>
+          </li>
+        </ul>
+      </div>
+      <div v-if="activeTab === 2">
+        <h3>Tab 2 Content</h3>
+        <p>Content for Tab 2 goes here.</p>
+      </div>
+      <div v-if="activeTab === 3">
+        <h3>Tab 3 Content</h3>
+        <p>Content for Tab 3 goes here.</p>
+      </div>
+      <div v-if="activeTab === 4">
+        <h3>Tab 4 Content</h3>
+        <p>Content for Tab 4 goes here.</p>
+      </div>
+      <div v-if="activeTab === 5">
+        <h3>Tab 5 Content</h3>
+        <p>Content for Tab 5 goes here.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const app = Vue.createApp({
+      data() {
+        return {
+          activeTab: 1,
+          resources: [], // To store checkbox states
+        };
+      },
+      created() {
+        // Check if data exists in localStorage when the component is created
+        const savedResources = localStorage.getItem('resources');
+        if (savedResources) {
+          // Parse the saved resources from localStorage and load them
+          this.resources = JSON.parse(savedResources);
+        } else {
+          // Default data if nothing is saved in localStorage
+          this.resources = [
+            { id: 1, name: "Copper Mug", checked: false },
+            { id: 2, name: "1 Lemon to wash copper pots", checked: false },
+            { id: 3, name: "White cloths to dry copper vessels", checked: false },
+            { id: 4, name: "Cotton Kerchiefs for program", checked: false },
+            { id: 5, name: "Tamarind", checked: false },
+            { id: 6, name: "Rubber band", checked: false },
+            { id: 7, name: "Wooden Tray (Optional)", checked: false },
+            { id: 8, name: "Additional normal white kerchiefs to open the bhumi and earth container", checked: false },
+            { id: 9, name: "Piece of paper with 'Month Program Name + Total Participants Count + Spot Registration Count", checked: false },
+            { id: 10, name: "Attendance Sheet PDF", checked: false },
+            { id: 12, name: "Get Locker passcode", checked: false },
+            { id: 11, name: "Buy Sugandha Raja Flowers", checked: false },
+            // { id: 13, name: "Buy Sugandha Raja Flowers", checked: false },
+            // { id: 14, name: "Buy Sugandha Raja Flowers", checked: false },
+            // { id: 15, name: "Buy Sugandha Raja Flowers", checked: false }
+          ];
+        }
+      },
+      watch: {
+        // Watch for changes in the `resources` array and save to localStorage
+        resources(newResources) {
+          localStorage.setItem('resources', JSON.stringify(newResources));
+        }
+      },
+      methods: {
+        moveToLast(index) {
+          const item = this.resources[index];
+          if (item.checked) {
+            // Move checked item to the end of the list
+            this.resources.splice(index, 1);
+            this.resources.push(item);
+          }
+        },
+      },
+    });
+
+    app.mount("#app");
+  </script>
+
+</body>
+
+</html>
