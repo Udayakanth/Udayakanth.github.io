@@ -4,227 +4,226 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vue 3 Tabs with Checkbox List</title>
+  <title>Vue 3 Multiple Collapsible Lists</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
   <style>
     body {
       font-family: Arial, sans-serif;
-      padding: 20px;
+      margin: 20px;
     }
 
-    .tabs {
-      display: flex;
+    .container {
+      max-width: 800px;
+      /* Set a maximum width for the container */
+      margin: 0 auto;
+      /* Center the container horizontally */
+      text-align: left;
+      /* Center-align text inside the container */
+    }
+
+    .heading {
+      font-size: 24px;
+      /* Bigger heading */
       cursor: pointer;
-      margin-bottom: 20px;
+      /* Change cursor to indicate clickable */
+      margin-bottom: 10px;
     }
 
-    .tab {
-      margin-right: 20px;
-      padding: 10px 20px;
-      background-color: #f1f1f1;
-      border-radius: 5px;
-      text-align: center;
+    .bullet-points {
+      list-style-type: none;
+      /* Remove default bullet points */
+      padding: 0;
+      /* Remove padding from ul */
     }
 
-    .tab.active {
-      background-color: #007bff;
-      color: white;
-    }
-
-    .tab-content {
-      padding: 20px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-    }
-
-    ul {
-      padding-left: 0;
-      margin: 0;
-      list-style: none;
-    }
-
-    .checkbox-item {
-      padding: 5px 0;
-      display: flex;
-      align-items: center;
-    }
-
-    .checkbox-item label {
+    .bullet-point {
       cursor: pointer;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      display: inline-block;
+      /* Change cursor to indicate clickable */
+      border: 1px solid transparent;
+      /* Default border */
+      padding: 2px;
+      /* Add some padding */
+      margin-bottom: 2px;
+      /* Space between bullet points */
+      display: block;
+      /* Ensure each bullet point is on a new line */
     }
 
-    .checked label {
-      background-color: #d4edda;
-      /* Green background for checked items */
+    .bullet-point.green {
+      border-color: green;
+      /* Change border color to green when selected */
       color: green;
-      /* Green text for checked items */
+      /* Color for selected bullet points */
     }
 
-    .locked label {
-      background-color: #d4edda;
-      /* Green background for locked items */
+    .black {
+      color: black;
+      /* Default color for bullet points */
+    }
+
+    .heading-green {
       color: green;
-      /* Green text for locked items */
+      /* Color for heading when all bullet points are selected */
     }
 
-    .checkbox-item input {
-      margin-right: 10px;
-    }
-
-    .locked input {
-      pointer-events: none;
-      /* Disable input for locked items */
+    .summary {
+      color: gray;
+      /* Gray color for summary text */
+      font-size: 14px;
+      /* Slightly smaller font size for summary */
     }
   </style>
 </head>
 
 <body>
-
   <div id="app">
-    <div class="tabs">
-      <div class="tab" :class="{ active: activeTab === 1 }" @click="activeTab = 1">
-        Required Resources
-      </div>
-      <div class="tab" :class="{ active: activeTab === 2 }" @click="activeTab = 2">
-        Tab 2
-      </div>
-      <div class="tab" :class="{ active: activeTab === 3 }" @click="activeTab = 3">
-        Tab 3
-      </div>
-      <div class="tab" :class="{ active: activeTab === 4 }" @click="activeTab = 4">
-        Tab 4
-      </div>
-      <div class="tab" :class="{ active: activeTab === 5 }" @click="activeTab = 5">
-        Tab 5
-      </div>
-    </div>
+    <div class="container">
 
-    <div class="tab-content">
-      <div v-if="activeTab === 1">
-        <h3>Required Resources</h3>
-
-        <div v-for="(resources, location) in groupedResources" :key="location">
-          <h4>{{ location }}</h4>
-          <ul>
-            <li v-for="(item, index) in resources" :key="item.id" class="checkbox-item"
-              :class="{ checked: item.checked, locked: item.locked }">
-              <input type="checkbox" :id="item.id" v-model="item.checked"
-                @change="moveToLastInLocation(index, location)" :disabled="item.locked" 
-              />
-              <label :for="item.id">
-                <span>{{ item.name }}</span>
-              </label>
-            </li>
-          </ul>
+      <div v-for="(section, sectionIndex) in sections" :key="sectionIndex">
+        <div class="heading" :class="{ 'heading-green': allSelected(sectionIndex) }" @click="toggleList(sectionIndex)">
+          <span>{{ section.isVisible ? '▼' : '►' }}</span> <!-- Arrow icon -->
+          <span v-if="allSelected(sectionIndex)">✅</span> <!-- Checkmark if all bullet points are selected -->
+          {{ section.heading }}
+          <span class="summary"> [ {{ countSelected(sectionIndex) }} / {{ section.bulletPoints.length }} ]</span>
         </div>
-      </div>
 
-      <div v-if="activeTab === 2">
-        <h3>Tab 2 Content</h3>
-        <p>Content for Tab 2 goes here.</p>
-      </div>
-      <div v-if="activeTab === 3">
-        <h3>Tab 3 Content</h3>
-        <p>Content for Tab 3 goes here.</p>
-      </div>
-      <div v-if="activeTab === 4">
-        <h3>Tab 4 Content</h3>
-        <p>Content for Tab 4 goes here.</p>
-      </div>
-      <div v-if="activeTab === 5">
-        <h3>Tab 5 Content</h3>
-        <p>Content for Tab 5 goes here.</p>
+        <ul v-show="section.isVisible" class="bullet-points">
+          <li v-for="(point, index) in section.bulletPoints" :key="index"
+            :class="[point.isSelected ? 'green' : 'black', 'bullet-point']" @click="toggleColor(sectionIndex, index)">
+            <span v-if="point.isSelected">✅</span> <!-- Checkmark if selected -->
+            {{ point.text }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
-
   <script>
-    const app = Vue.createApp({
+    const { createApp } = Vue;
+
+    createApp({
       data() {
         return {
-          activeTab: 1,
-          resources: [], // To store checkbox states
+          sections: [
+            {
+              heading: 'Ensure that the following items are in a ready-to-use state',
+              isVisible: true,
+              bulletPoints: [
+                { text: '1) Copper mug.', isSelected: false },
+                { text: '2) Tamarind.', isSelected: false },
+                { text: '3) White cloths to dry copper vessels.', isSelected: false },
+                { text: '4) Iron box.', isSelected: false },
+                { text: '5) Wooden Tray.', isSelected: false },
+                { text: '6) Rubber band.', isSelected: false },
+                { text: '7) Scissors.', isSelected: false },
+                { text: '8) Additional white kerchiefs to open the bhumi and earth container.', isSelected: false },
+                { text: '9) Piece of paper with Program Name, Month, Total Participants, and Spot Registration Count.', isSelected: false },
+                { text: '10) Attendance Sheet Image.', isSelected: false },
+                { text: '11) Match Boxes.', isSelected: false },
+                { text: '12) Agarabatti.', isSelected: false },
+                { text: '13) Agarabatti Stand.', isSelected: false },
+                { text: '14) Hata Yoga Forms.', isSelected: false },
+                { text: '15) Writing Pads.', isSelected: false },
+                { text: '16) Pens.', isSelected: false },
+                { text: '17) Tape (to clean hall).', isSelected: false },
+                { text: '18) 2 Steel containers to wash copper pots.', isSelected: false },
+                { text: '19) Bidiru Butti.', isSelected: false },
+                { text: '20) Attendance Sheet Printout.', isSelected: false },
+                { text: '21) Water Cans.', isSelected: false },
+                { text: '22) Keys for the Devi Room and Program Hall from the locker.', isSelected: false }
+              ]
+            }
+            ,
+            {
+              heading: 'Batch-A Tasks',
+              isVisible: true,
+              bulletPoints: [
+                { text: '1) Get participants count from accounts team.', isSelected: false },
+                { text: '2) Call Isha Shoppe Jayanagar and order the kits (order +3 kits as buffer).', isSelected: false },
+                { text: '3) Call Akka at the shop to get confirmation on whether the kits have arrived.', isSelected: false },
+                { text: '4) Order Kerchiefs.', isSelected: false },
+                { text: '5) Buy Match Boxes.', isSelected: false }
+              ]
+            },
+            {
+              heading: 'Batch-B Tasks',
+              isVisible: true,
+              bulletPoints: [
+                { text: '1) Switch on all the lights in the "Program Hall".', isSelected: false },
+                { text: '2) Switch on all the fans in the "Program Hall" during the kit setup process.', isSelected: false },
+                { text: '3) Open the Program Hall windows (total 3 windows).', isSelected: false }
+              ]
+            },
+            {
+              heading: 'Batch-C Tasks',
+              isVisible: true,
+              bulletPoints: [
+                { text: '1) Light the lamp in the Devi room.', isSelected: false },
+                { text: '2) Light the Lamp in the Program Hall.', isSelected: false },
+                { text: '3) Decorate Devi, Sannidhi with flowers that were brought in by volunteers.', isSelected: false },
+                { text: '4) Decorate Uruli with flowers.', isSelected: false }
+              ]
+            },
+            {
+              heading: 'Batch-D Tasks',
+              isVisible: true,
+              bulletPoints: [
+                { text: '1) Use room freshener in the restrooms if necessary.', isSelected: false },
+                { text: '2) Clean the hall. Volunteers need to remove hair and unwanted strands (use tape).', isSelected: false },
+                { text: '3) Check if Registration and Shoe Rack area need Brooming.', isSelected: false }
+              ]
+            },
+            {
+              heading: 'Batch-E Tasks',
+              isVisible: true,
+              bulletPoints: [
+                { text: '1) Iron Kerchiefs.', isSelected: false },
+                { text: '2) Cut open the Bhumi sachet and fill the copper container (use white kerchief).', isSelected: false },
+                { text: '3) Check if the camphor container opens easily (use white kerchief).', isSelected: false },
+                { text: '4) Untie the Mantra cloth and keep it in a ready-to-use state.', isSelected: false },
+                { text: '5) In each matchbox, keep 2 matchsticks in a ready-to-use state.', isSelected: false },
+                { text: '6) Use Cardboard box to place the cut opened sachet (mini dustbin).', isSelected: false }
+              ]
+            },
+            {
+              heading: 'Batch-F Tasks',
+              isVisible: true,
+              bulletPoints: [
+                { text: '1. Collect the kits from Isha Shoppe and count the total number of kits taken.', isSelected: false },
+                { text: '2. Use scissors to cut open the boxes.', isSelected: false },
+                { text: '3. Fill both steel containers with water; in one, add and squeeze tamarind, then stir.', isSelected: false },
+                { text: '4. In tamarind used steel container, place all the copper pots and small plates for 5 min.', isSelected: false },
+                { text: '5. Dip each copper pot 4-5 times in the tamarind steel container.', isSelected: false },
+                { text: '6. Use the second steel container with fresh water to dip the copper pots 4-5 times again, ensuring there is no tamarind residue.', isSelected: false }
+              ]
+            },
+            {
+              heading: 'Batch-G Tasks',
+              isVisible: true,
+              bulletPoints: [
+                { text: '1) Light the agarabatti in the Program Hall at 5:15 PM and take it out at 5:45 PM. Keep it outside (close to the Dhyanalinga photo).', isSelected: false },
+                { text: '2) Play the "Yoga Padi" audio exactly at 5:28 pm.', isSelected: false },
+                { text: '3) Around 5:30 PM, switch on the lights in the registration area.', isSelected: false }
+              ]
+            }
+          ]
         };
       },
-      created() {
-        localStorage.clear();
-        // Check if data exists in localStorage when the component is created
-        const savedResources = localStorage.getItem('resources');
-        if (savedResources) {
-          // Parse the saved resources from localStorage and load them
-          this.resources = JSON.parse(savedResources);
-        } else {
-          // Default data if nothing is saved in localStorage
-          this.resources = [
-            { id: 1, name: "Copper Mug", checked: false, location: "@Home" },
-            { id: 2, name: "1 Lemon to wash copper pots", checked: false, location: "@Home" },
-            { id: 3, name: "White cloths to dry copper vessels", checked: false, location: "@Home" },
-            { id: 4, name: "Cotton Kerchiefs for program", checked: false, location: "@Home" },
-            { id: 5, name: "Tamarind", checked: false, location: "@Home" },
-            { id: 6, name: "Rubber band", checked: false, location: "@Home" },
-            { id: 7, name: "Wooden Tray (Optional)", checked: false, location: "@Home" },
-            { id: 8, name: "Additional normal white kerchiefs to open the bhumi and earth container", checked: false, location: "@Home" },
-            { id: 9, name: "Piece of paper with 'Month Program Name + Total Participants Count + Spot Registration Count", checked: false, location: "@Home" },
-            { id: 10, name: "Attendance Sheet PDF", checked: false, location: "@Home" },
-            { id: 16, name: "Attendance Sheet Printout", checked: false, location: "@Xerox Shop" },
-            { id: 12, name: "Get Locker passcode", checked: false, location: "@Home" },
-            { id: 11, name: "Buy Sugandha Raja Flowers", checked: false, location: "@Market" },
-            // { id: 13, name: "Buy Sugandha Raja Flowers", checked: false , location: "@Home"},
-            // { id: 14, name: "Buy Sugandha Raja Flowers", checked: false , location: "@Home"},
-            // { id: 15, name: "Buy Sugandha Raja Flowers", checked: false, location: "@Home" }
-          ];
-        }
-        console.log(this.resources); // Debugging to ensure data is loaded correctly
-      },
-      computed: {
-        // Group resources by location
-        groupedResources() {
-          return this.resources.reduce((groups, resource) => {
-            if (!groups[resource.location]) {
-              groups[resource.location] = [];
-            }
-            groups[resource.location].push(resource);
-            return groups;
-          }, {});
-        },
-      },
-      watch: {
-        // Watch for changes in the `resources` array and save to localStorage
-        resources(newResources) {
-          localStorage.setItem('resources', JSON.stringify(newResources));
-        }
-      },
       methods: {
-        moveToLastInLocation(index, location) {
-          // Find the resource in the specific location
-          const resource = this.resources[index];
-
-          if (resource.checked && !resource.locked) {
-            // Get the group for the given location
-            const locationResources = this.resources.filter(r => r.location === location);
-
-            // Sort the location resources so that checked items come last
-            const sortedResources = [
-              ...locationResources.filter(r => !r.checked),
-              ...locationResources.filter(r => r.checked)
-            ];
-
-            // Reassign sorted list to the original resources for that location
-            this.resources = this.resources.map(r => {
-              if (r.location === location) {
-                const sortedResource = sortedResources.find(sr => sr.id === r.id);
-                return sortedResource ? sortedResource : r;
-              }
-              return r;
-            });
-          }
+        toggleList(index) {
+          this.sections[index].isVisible = !this.sections[index].isVisible; // Toggle visibility
         },
-      },
-    });
-
-    app.mount("#app");
+        toggleColor(sectionIndex, pointIndex) {
+          this.sections[sectionIndex].bulletPoints[pointIndex].isSelected =
+            !this.sections[sectionIndex].bulletPoints[pointIndex].isSelected; // Toggle selection state
+        },
+        allSelected(sectionIndex) {
+          return this.sections[sectionIndex].bulletPoints.every(point => point.isSelected); // Check if all bullet points are selected
+        },
+        countSelected(sectionIndex) {
+          return this.sections[sectionIndex].bulletPoints.filter(point => point.isSelected).length; // Count selected bullet points
+        }
+      }
+    }).mount('#app');
   </script>
 
 </body>
