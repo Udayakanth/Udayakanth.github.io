@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vue 3 Multiple Collapsible Lists</title>
+  <title>Bhuta Shuddhi Program</title>
   <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
   <style>
     body {
@@ -79,7 +79,7 @@
 <body>
   <div id="app">
     <div class="container">
-
+      <h3 style="color:#534cdc">Bhuta Shuddhi Coordination Guide</h3>
       <div v-for="(section, sectionIndex) in sections" :key="sectionIndex">
         <div class="heading" :class="{ 'heading-green': allSelected(sectionIndex) }" @click="toggleList(sectionIndex)">
           <span>{{ section.isVisible ? '▼' : '►' }}</span> <!-- Arrow icon -->
@@ -106,7 +106,7 @@
         return {
           sections: [
             {
-              heading: 'Get these items ready for use',
+              heading: 'Essentials',
               isVisible: true,
               bulletPoints: [
                 { text: '1) Copper mug.', isSelected: false },
@@ -130,7 +130,7 @@
                 { text: '19) Bidiru Butti.', isSelected: false },
                 { text: '20) Attendance Sheet Printout.', isSelected: false },
                 { text: '21) Water Cans.', isSelected: false },
-                { text: '22) Keys for the Devi Room and Program Hall from the locker.', isSelected: false }
+                { text: '22) Get the keys for the Devi Room and Program Hall from the locker.', isSelected: false }
               ]
             }
             ,
@@ -138,20 +138,20 @@
               heading: 'Batch-A Tasks',
               isVisible: true,
               bulletPoints: [
-                { text: '1) Get participants count from accounts team.', isSelected: false },
-                { text: '2) Call Isha Shoppe Jayanagar and order the kits (order +3 kits as buffer).', isSelected: false },
-                { text: '3) Call Akka at the shop to get confirmation on whether the kits have arrived.', isSelected: false },
-                { text: '4) Order Kerchiefs.', isSelected: false },
-                { text: '5) Buy Match Boxes.', isSelected: false }
+                { text: '1) Get the participant count from the accounts team.', isSelected: false },
+                { text: '2) Call Isha Shoppe Jayanagar and order the kits (order +3 kits as a buffer).', isSelected: false },
+                { text: '3) Call Akka at the shop to confirm whether the kits have arrived.', isSelected: false },
+                { text: '4) Order kerchiefs.', isSelected: false },
+                { text: '5) Buy matchboxes.', isSelected: false }
               ]
             },
             {
               heading: 'Batch-B Tasks',
               isVisible: true,
               bulletPoints: [
-                { text: '1) Switch on all the lights in the "Program Hall".', isSelected: false },
-                { text: '2) Switch on all the fans in the "Program Hall" during the kit setup process.', isSelected: false },
-                { text: '3) Open the Program Hall windows (total 3 windows).', isSelected: false }
+                { text: '1) Switch on all the lights in the Program Hall.', isSelected: false },
+                { text: '2) Switch on all the fans in the Program Hall during the kit setup process.', isSelected: false },
+                { text: '3) Open the three windows in the Program Hall.', isSelected: false }
               ]
             },
             {
@@ -159,30 +159,30 @@
               isVisible: true,
               bulletPoints: [
                 { text: '1) Light the lamp in the Devi room.', isSelected: false },
-                { text: '2) Light the Lamp in the Program Hall.', isSelected: false },
-                { text: '3) Decorate Devi, Sannidhi with flowers that were brought in by volunteers.', isSelected: false },
-                { text: '4) Decorate Uruli with flowers.', isSelected: false }
+                { text: '2) Light the lamp in the Program Hall.', isSelected: false },
+                { text: '3) Decorate Devi photo, Sannidhi with flowers brought in by volunteers.', isSelected: false },
+                { text: '4) Decorate the Uruli with flowers.', isSelected: false }
               ]
             },
             {
               heading: 'Batch-D Tasks',
               isVisible: true,
               bulletPoints: [
-                { text: '1) Use room freshener in the restrooms if necessary.', isSelected: false },
-                { text: '2) Clean the hall. Volunteers need to remove hair and unwanted strands (use tape).', isSelected: false },
-                { text: '3) Check if Registration and Shoe Rack area need Brooming.', isSelected: false }
+                { text: '1) Use room freshener in the restrooms as needed.', isSelected: false },
+                { text: '2) Clean the hall. Volunteers should remove hair and unwanted strands using tape.', isSelected: false },
+                { text: '3) Check if the Registration and Shoe Rack areas need to be swept.', isSelected: false }
               ]
             },
             {
               heading: 'Batch-E Tasks',
               isVisible: true,
               bulletPoints: [
-                { text: '1) Iron Kerchiefs.', isSelected: false },
-                { text: '2) Cut open the Bhumi sachet and fill the copper container (use white kerchief).', isSelected: false },
-                { text: '3) Check if the camphor container opens easily (use white kerchief).', isSelected: false },
-                { text: '4) Untie the Mantra cloth and keep it in a ready-to-use state.', isSelected: false },
-                { text: '5) In each matchbox, keep 2 matchsticks in a ready-to-use state.', isSelected: false },
-                { text: '6) Use Cardboard box to place the cut opened sachet (mini dustbin).', isSelected: false }
+                { text: '1) Iron the kerchiefs.', isSelected: false },
+                { text: '2) Cut open the Bhumi sachet and fill the copper container (using a white kerchief).', isSelected: false },
+                { text: '3) Check if the camphor container opens easily (using a white kerchief).', isSelected: false },
+                { text: '4) Untie the Mantra cloth and keep it ready for use.', isSelected: false },
+                { text: '5) Place 2 matchsticks in each matchbox, ensuring they are ready for use.', isSelected: false },
+                { text: '6) Use a cardboard box to store the opened sachet (acting as a mini dustbin).', isSelected: false }
               ]
             },
             {
@@ -192,7 +192,7 @@
                 { text: '1. Collect the kits from Isha Shoppe and count the total number of kits taken.', isSelected: false },
                 { text: '2. Use scissors to cut open the boxes.', isSelected: false },
                 { text: '3. Fill both steel containers with water; in one, add and squeeze tamarind, then stir.', isSelected: false },
-                { text: '4. In tamarind used steel container, place all the copper pots and small plates for 5 min.', isSelected: false },
+                { text: '4. In the tamarind-used steel container, place all the copper pots and small plates for 5 minutes.', isSelected: false },
                 { text: '5. Dip each copper pot 4-5 times in the tamarind steel container.', isSelected: false },
                 { text: '6. Use the second steel container with fresh water to dip the copper pots 4-5 times again, ensuring there is no tamarind residue.', isSelected: false }
               ]
@@ -201,8 +201,8 @@
               heading: 'Batch-G Tasks',
               isVisible: true,
               bulletPoints: [
-                { text: '1) Light the agarabatti in the Program Hall at 5:15 PM and take it out at 5:45 PM. Keep it outside (close to the Dhyanalinga photo).', isSelected: false },
-                { text: '2) Play the "Yoga Padi" audio exactly at 5:28 pm.', isSelected: false },
+                { text: '1) Light the agarabatti in the Program Hall at 5:15 PM and take it out at 5:45 PM. Keep it outside, close to the Dhyanalinga photo.', isSelected: false },
+                { text: '2) Play the "Yoga Padi" audio exactly at 5:28 PM.', isSelected: false },
                 { text: '3) Around 5:30 PM, switch on the lights in the registration area.', isSelected: false }
               ]
             }
