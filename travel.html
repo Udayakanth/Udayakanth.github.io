@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel Plan</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      /* Set a maximum width for the container */
+      margin: 0 auto;
+      /* Center the container horizontally */
+      text-align: left;
+      /* Center-align text inside the container */
+    }
+
+    .heading {
+      font-size: 24px;
+      /* Bigger heading */
+      cursor: pointer;
+      /* Change cursor to indicate clickable */
+      margin-bottom: 10px;
+      margin-top: 40px;
+      /* Add space above each section *
+    }
+
+    .bullet-points {
+      list-style-type: none;
+      /* Remove default bullet points */
+      padding: 0;
+      /* Remove padding from ul */
+    }
+
+    .bullet-point {
+      cursor: pointer;
+      /* Change cursor to indicate clickable */
+      border: 1px solid transparent;
+      /* Default border */
+      padding: 2px;
+      /* Add some padding */
+      margin-bottom: 0px;
+      /* Space between bullet points */
+      display: block;
+      /* Ensure each bullet point is on a new line */
+    }
+
+    .bullet-point.green {
+      border-color: green;
+      /* Change border color to green when selected */
+      color: green;
+      /* Color for selected bullet points */
+    }
+
+    .black {
+      color: black;
+      /* Default color for bullet points */
+    }
+
+    .heading-green {
+      color: green;
+      /* Color for heading when all bullet points are selected */
+    }
+
+    .summary {
+      color: gray;
+      /* Gray color for summary text */
+      font-size: 14px;
+      /* Slightly smaller font size for summary */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="container">
+      <h3 style="color:#534cdc">Travel Plan Guide</h3>
+      <div v-for="(section, sectionIndex) in sections" :key="sectionIndex">
+        <div class="heading" :class="{ 'heading-green': allSelected(sectionIndex) }" @click="toggleList(sectionIndex)">
+          <span>{{ section.isVisible ? '▼' : '►' }}</span> <!-- Arrow icon -->
+          <span v-if="allSelected(sectionIndex)">✅</span> <!-- Checkmark if all bullet points are selected -->
+          {{ section.heading }}
+          <span class="summary"> [ {{ countSelected(sectionIndex) }} / {{ section.bulletPoints.length }} ]</span>
+        </div>
+
+        <ul v-show="section.isVisible" class="bullet-points">
+          <li v-for="(point, index) in section.bulletPoints" :key="index"
+            :class="[point.isSelected ? 'green' : 'black', 'bullet-point']" @click="toggleColor(sectionIndex, index)">
+            <span v-if="point.isSelected">✅</span> <!-- Checkmark if selected -->
+            {{ point.text }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script>
+    const { createApp } = Vue;
+
+    createApp({
+      data() {
+        return {
+          sections: [
+            {
+              heading: 'Essentials',
+              isVisible: false,
+              bulletPoints: [
+                { text: '1) Winter Cap', isSelected: false },
+                { text: '2) Skin Oil', isSelected: false },
+                { text: '3) Gloves + Socks', isSelected: false },
+                { text: '4) Bed Sheet', isSelected: false },
+                { text: '5) A-Flucin', isSelected: false },
+                { text: '6) Skin Cream', isSelected: false },
+                { text: '7) Lip Balm', isSelected: false },
+                { text: '8) Tooth Brush + Tooth Paste', isSelected: false },
+                { text: '9) Soap + Shampoo', isSelected: false },
+                { text: '10) Facewash Gel', isSelected: false },
+                { text: '11) KumKum', isSelected: false },
+                { text: '12) Towel', isSelected: false },
+                { text: '13) Water Bottle (first instance)', isSelected: false },
+                { text: '14) Headphone', isSelected: false },
+                { text: '15) ID Card', isSelected: false },
+                { text: '16) Cash + ATM', isSelected: false },
+                { text: '17) Kerchiefs', isSelected: false },
+                { text: '18) Paper Pen', isSelected: false },
+                { text: '19) Blue Color College Bag', isSelected: false },
+                { text: '20) Night T-Shirt + Pant', isSelected: false },
+                { text: '21) News Paper', isSelected: false },
+                { text: '22) Water Bottle (second instance)', isSelected: false },
+                { text: '23) Track Pants', isSelected: false },
+                { text: '24) Cloth Set', isSelected: false },
+                { text: '25) Inhaler', isSelected: false },
+              ]
+            }
+            ,
+            {
+              heading: 'Kalaburagi Trip',
+              isVisible: false,
+              
+              bulletPoints: [
+                { text: '1) Mobile Charger', isSelected: false },
+                { text: '2) Winter Cap', isSelected: false },
+                { text: '3) Sunlight Cap', isSelected: false },
+                { text: '4) Sun Glass', isSelected: false },
+                { text: '5) Ponds Cream', isSelected: false },
+                { text: '6) Gloves + Socks', isSelected: false },
+                { text: '7) Bed Sheet', isSelected: false },
+                { text: '8) A-Flucin', isSelected: false },
+                { text: '9) Skin Cream', isSelected: false },
+                { text: '10) Lip Balm', isSelected: false },
+                { text: '11) Tooth Brush + Tooth Paste', isSelected: false },
+                { text: '12) Masks', isSelected: false },
+                { text: '13) Soap + Shampoo', isSelected: false },
+                { text: '14) Facewash Gel.', isSelected: false },
+                { text: '15) KumKum', isSelected: false },
+                { text: '16) Towel', isSelected: false },
+                { text: '17) Water Bottle', isSelected: false },
+                { text: '18) Headphone', isSelected: false },
+                { text: '19) ID Card', isSelected: false },
+                { text: '20) Cash + ATM', isSelected: false },
+                { text: '21) Kerchiefs', isSelected: false },
+                { text: '22) Yoga Mat + Purple Mat', isSelected: false },
+                { text: '23) Paper Pen', isSelected: false },
+                { text: '24) Coconut Oil', isSelected: false },
+                { text: '25) Detergent Powder', isSelected: false },
+                { text: '26) Umbrella', isSelected: false },
+                { text: '27) Cloth Clips', isSelected: false },
+                { text: '28) Blue Color College Bag', isSelected: false },
+                { text: '29) Night T-Shirt + Pant', isSelected: false },
+                { text: '30) News Paper', isSelected: false },
+                { text: '31) Sanetizer', isSelected: false },
+                { text: '32) Water Bottle', isSelected: false },
+                { text: '33) Track Pants', isSelected: false },
+                { text: '34) Cloth Set', isSelected: false },
+                { text: '35) ...', isSelected: false },
+
+              ]
+            },
+            {
+              heading: 'Batch-B Tasks',
+              isVisible: false,
+              bulletPoints: [
+                { text: '1) Switch on all the lights in the Program Hall.', isSelected: false },
+                { text: '2) Switch on all the fans in the Program Hall during the kits setup process.', isSelected: false },
+                { text: '3) Open the three windows in the Program Hall.', isSelected: false }
+              ]
+            },
+            {
+              heading: 'Batch-C Tasks',
+              isVisible: false,
+              bulletPoints: [
+                { text: '1) Light the lamp in the Devi room.', isSelected: false },
+                { text: '2) Light the lamp in the Program Hall.', isSelected: false },
+                { text: '3) Decorate Devi photo, Sannidhi with flowers brought in by volunteers.', isSelected: false },
+                { text: '4) Decorate the Uruli with flowers.', isSelected: false }
+              ]
+            },
+            {
+              heading: 'Batch-D Tasks',
+              isVisible: false,
+              bulletPoints: [
+                { text: '1) Use room freshener in the restrooms as needed.', isSelected: false },
+                { text: '2) Clean the hall. Volunteers should remove hair and unwanted strands using tape.', isSelected: false },
+                { text: '3) Check if the Registration and Shoe Rack areas need to be swept.', isSelected: false }
+              ]
+            },
+            {
+              heading: 'Batch-E Tasks',
+              isVisible: false,
+              bulletPoints: [
+                { text: '1. Collect the kits from Isha Shoppe and count the total number of kits taken.', isSelected: false },
+                { text: '2. Use scissors to cut open the boxes.', isSelected: false },
+                { text: '3. Fill both steel containers with water; in one, add and squeeze tamarind, then stir.', isSelected: false },
+                { text: '4. In the tamarind-used steel container, place all the copper pots and small plates for 5 minutes.', isSelected: false },
+                { text: '5. Dip each copper pot 4-5 times in the tamarind steel container.', isSelected: false },
+                { text: '6. Use the second steel container with fresh water to dip the copper pots 4-5 times again, ensuring there is no tamarind residue.', isSelected: false },
+                { text: '7. Use white cloths to dry the copper pots and small plates.', isSelected: false },
+                { text: '8. Take all the dried copper pots, plates, two cardboard boxes and kits upstairs to the program hall.', isSelected: false },
+                { text: '9. Two cardboard boxes later serve as a small trash bin', isSelected: false }
+              ]
+            },
+            {
+              heading: 'Batch-F Tasks',
+              isVisible: false,
+              bulletPoints: [
+                { text: '1) Iron the kerchiefs.', isSelected: false },
+                { text: '2) Cut open 1 Bhumi sachet and fill the empty Bhumi copper container (use white kerchief).', isSelected: false },
+                { text: '3) Ensure that the caps of the Bhumi container and Camphor container are easy to open for participants.', isSelected: false },
+                { text: '4) Untie all the mantra cloths and keep them in one place', isSelected: false },
+                { text: '5) Place 2 matchsticks in each matchbox, ensuring they are ready for use.', isSelected: false },
+                { text: '6) Use a cardboard box to store the cut opened sachets.', isSelected: false },
+                { text: '7) Fill all the copper pots halfway.', isSelected: false },
+              ]
+            },
+            {
+              heading: 'Batch-G Tasks',
+              isVisible: false,
+              bulletPoints: [
+                { text: '1) Place the kerchiefs in a 4:3 or 5:4 format depending on the number of participants; for example, the first row should have 4 kerchiefs and the next row should have 3 kerchiefs.', isSelected: false },
+                { text: '2) Place the Bhumi container on the kerchief at the top left corner, and place the Camphor container next to it.', isSelected: false },
+                { text: '3) Place a half-filled copper pot at the center of the kerchief, moving it 10% to the left.', isSelected: false },
+                { text: '4) Place one small copper plate on top of the copper pot and another to the right side, leaving some space between them.', isSelected: false },
+                { text: '5) Place one matchbox at the bottom left, ensuring its placement is diagonal and pointing towards the center of the kerchief.', isSelected: false },
+                { text: '6) Place 3 Sugandha Raja flowers in the top right corner, arranging them diagonally towards that corner.', isSelected: false },
+                { text: '7) Fold the cloth bag and place it outside the kerchief at the top left corner, ensuring its placement is diagonally directed towards the top left.', isSelected: false },
+                { text: '8) Place the Mantra cloth at the bottom right of the kerchief, tilting it slightly to the right diagonally.', isSelected: false },
+              ]
+            },
+            {
+              heading: 'Batch-H Tasks',
+              isVisible: false,
+              bulletPoints: [
+                { text: '1) Light the agarabatti in the Program Hall at 5:15 PM and take it out at 5:45 PM. Keep it outside, close to the Dhyanalinga photo.', isSelected: false },
+                { text: '2) Play the "Yoga Padi" audio exactly at 5:28 PM.', isSelected: false },
+                { text: '3) Around 5:30 PM, switch on the lights in the registration area.', isSelected: false }
+              ]
+            }
+          ]
+        };
+      },
+      methods: {
+        toggleList(index) {
+          this.sections[index].isVisible = !this.sections[index].isVisible; // Toggle visibility
+        },
+        toggleColor(sectionIndex, pointIndex) {
+          this.sections[sectionIndex].bulletPoints[pointIndex].isSelected =
+            !this.sections[sectionIndex].bulletPoints[pointIndex].isSelected; // Toggle selection state
+        },
+        allSelected(sectionIndex) {
+          return this.sections[sectionIndex].bulletPoints.every(point => point.isSelected); // Check if all bullet points are selected
+        },
+        countSelected(sectionIndex) {
+          return this.sections[sectionIndex].bulletPoints.filter(point => point.isSelected).length; // Count selected bullet points
+        }
+      }
+    }).mount('#app');
+  </script>
+
+</body>
+
+</html>
