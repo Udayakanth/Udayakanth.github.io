@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    .container {
+      display: flex;
+      gap: 40px;
+    }
+
+    .column {
+      flex: 1;
+    }
+
+    .item {
+      padding: 8px 15px;
+      margin: 5px 0;
+      background: #f0f0f0;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .item:hover {
+      background: #e0e0e0;
+    }
+
+    .copied {
+      background: #90EE90;
+      color: #006400;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div id="names" class="column">
+      <h3>Names</h3>
+    </div>
+    <div id="numbers" class="column">
+      <h3>Numbers</h3>
+    </div>
+  </div>
+
+  <script>
+    const data = `JN_IE_1_Vidyasagar D	9008772416	
+JN_IE_1_Ashi Anurag Singh	9569312613	
+JN_IE_1_Chelsea Scolt	9163780848	
+JN_IE_1_Jegan Pillai	9986134644	
+JN_IE_1_Vaidehi S	9448708368	
+JN_IE_1_Vijaya Bhaskar	8792586715	
+JN_IE_1_Sudan Shanthkumar	7204551746	
+JN_IE_1_Rakesh Aradhya	8277126976	
+JN_IE_1_kiran kumar	919740094705	
+JN_IE_1_Rohit Gavirni	9176480472	
+JN_IE_1_ALAVALA VENKATA SUBBULU	8105201995	
+JN_IE_1_Yamuna Kukatla	9742496087	
+JN_IE_1_Sailaja Pinnu	7483221440	
+JN_IE_1_Anitha Reddy	6361559709	
+JN_IE_1_Harshitha N Raju	8050551084	
+JN_IE_1_Saraswati Gavirni	9703324188	
+JN_IE_1_Krishna Gavirni	9581099699	
+JN_IE_1_Suresh Kumar	9686831796`;
+
+    const namesContainer = document.getElementById('names');
+    const numbersContainer = document.getElementById('numbers');
+
+    data.split('\n').forEach(line => {
+      const [name, mobile] = line.split('\t').filter(item => item);
+
+      const nameDiv = document.createElement('div');
+      nameDiv.className = 'item';
+      nameDiv.textContent = name;
+      nameDiv.onclick = () => copyAndHighlight(nameDiv, name);
+      namesContainer.appendChild(nameDiv);
+
+      const mobileDiv = document.createElement('div');
+      mobileDiv.className = 'item';
+      mobileDiv.textContent = mobile;
+      mobileDiv.onclick = () => copyAndHighlight(mobileDiv, mobile);
+      numbersContainer.appendChild(mobileDiv);
+    });
+
+    function copyAndHighlight(element, text) {
+      navigator.clipboard.writeText(text).then(() => {
+        element.classList.add('copied');
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+  </script>
+</body>
+
+</html>
