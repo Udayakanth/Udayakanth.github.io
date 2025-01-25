@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>John Doe - Senior Game Developer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    .header {
+      background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url('https://placehold.co/1920x1080');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1rem;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 1000;
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #4CAF50;
+    }
+
+    .header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .header p {
+      font-size: 1.5rem;
+      color: #4CAF50;
+    }
+
+    .section {
+      padding: 5rem 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 2.5rem;
+      color: #4CAF50;
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: #1a1a1a;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .project-info {
+      padding: 1.5rem;
+    }
+
+    .project-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .skills {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .skill-category {
+      background: #1a1a1a;
+      padding: 2rem;
+      border-radius: 10px;
+    }
+
+    .skill-category h3 {
+      color: #4CAF50;
+      margin-bottom: 1rem;
+    }
+
+    .skill-list {
+      list-style: none;
+    }
+
+    .skill-list li {
+      margin-bottom: 0.5rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .skill-list li::before {
+      content: "▹";
+      color: #4CAF50;
+      position: absolute;
+      left: 0;
+    }
+
+    .contact {
+      text-align: center;
+    }
+
+    .contact-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 2rem;
+      transition: background 0.3s;
+    }
+
+    .contact-button:hover {
+      background: #45a049;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #1a1a1a;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2.5rem;
+      }
+
+      .header p {
+        font-size: 1.2rem;
+      }
+
+      nav ul {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header id="home" class="header">
+    <h1>Udayakanth S</h1>
+    <p>Senior Game Developer</p>
+  </header>
+
+  <section id="projects" class="section">
+    <div class="container">
+      <h2 class="section-title">Featured Projects</h2>
+      <div class="projects">
+        <div class="project-card">
+          <img src="https://placehold.co/600x400" alt="Project 1" class="project-image">
+          <div class="project-info">
+            <h3 class="project-title">Epic Adventure RPG</h3>
+            <p>Lead developer for an open-world RPG with advanced AI systems and procedural generation.</p>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="https://placehold.co/600x400" alt="Project 2" class="project-image">
+          <div class="project-info">
+            <h3 class="project-title">Multiplayer Strategy</h3>
+            <p>Developed networking architecture and real-time strategy mechanics for a multiplayer game.</p>
+          </div>
+        </div>
+        <div class="project-card">
+          <img src="https://placehold.co/600x400" alt="Project 3" class="project-image">
+          <div class="project-info">
+            <h3 class="project-title">Mobile Racing Game</h3>
+            <p>Created physics engine and optimization systems for a high-performance mobile racing game.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="section">
+    <div class="container">
+      <h2 class="section-title">Skills & Expertise</h2>
+      <div class="skills">
+        <div class="skill-category">
+          <h3>Game Engines</h3>
+          <ul class="skill-list">
+            <li>Unreal Engine</li>
+            <li>Unity</li>
+            <li>Custom Engine Development</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h3>Programming</h3>
+          <ul class="skill-list">
+            <li>C++</li>
+            <li>C#</li>
+            <li>Python</li>
+            <li>Lua</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h3>Specializations</h3>
+          <ul class="skill-list">
+            <li>Graphics Programming</li>
+            <li>AI Systems</li>
+            <li>Network Architecture</li>
+            <li>Game Physics</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact">
+    <div class="container">
+      <h2 class="section-title">Get In Touch</h2>
+      <p>Interested in collaboration? Let's discuss your project!</p>
+      <a href="mailto:john.doe@example.com" class="contact-button">Contact Me</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 John Doe. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>
