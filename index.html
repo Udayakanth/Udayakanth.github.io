@@ -3,585 +3,237 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Level Editor </title>
+  <title>Document</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: #f4f4f4;
-    }
-
-    .level-container {
+    #wrap {
       max-width: 800px;
       margin: auto;
-      background: #fff;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 
-    .level {
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 16px;
-      margin: 16px 0;
-      background-color: #f9f9f9;
+    h2 {
+      background-color: aliceblue;
+      text-align: center;
+      font-size: xx-large;
     }
 
-    .section {
-      margin-bottom: 16px;
+    h3 {
+      background-color: aliceblue;
+      text-align: left;
+      font-size: large;
+      max-width: 600px;
     }
 
-    .field {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
+    li {
+      font-size: larger;
     }
 
-    .button {
-      margin: 10px;
-      background-color: #28a745;
-      /* Green background */
-      color: white;
-      /* White text */
-      border: none;
-      /* No border */
-      border-radius: 5px;
-      /* Rounded corners */
-      padding: 10px 20px;
-      /* Padding around the text */
-      font-size: 16px;
-      /* Font size */
-      cursor: pointer;
-      /* Pointer cursor on hover */
-      transition: background-color 0.3s;
-      /* Smooth transition */
+    section {
+      max-width: 900px;
     }
 
-    .button:hover {
-      background-color: #218838;
-      /* Darker green on hover */
-    }
-
-    .button_reload {
-      background-color: #28a7a3;
-    }
-
-    .button_reload:hover {
-      background-color: #218838;
-      /* Darker green on hover */
-    }
-
-    .button_combo {
-      background-color: #5fa4d8;
-    }
-
-    .button_combo:hover {
-      background-color: #3e9aa6;
-      /* Darker green on hover */
-    }
-
-    label {
-      flex: 1;
-    }
-
-    input[type="range"],
-    input[type="number"],
-    textarea {
-      flex: 2;
-      margin-left: 8px;
+    hr {
+      margin-bottom: 30px;
     }
   </style>
 </head>
 
 <body>
+  <div id="wrap">
+    <h2>Independent & Dham's Inc Collaboration</h2>
+    <section id="ParticleEditorTool">
+      <h3>Particle Editor Tool | Cocos2D-X Game Engine | QT GUI Framework </h3>
+      <video width="700" controls>
+        <source src="https://dl.dropboxusercontent.com/s/ad28710trga6tb6/001_Particle_Editor.mp4?dl=0" type="video/mp4">
+        <source src="mov_bbb.ogg" type="video/ogg">
+        Your browser does not support HTML video.
+      </video>
+      <ul>
+        <li> Developed this tool to update values of particles at runtime</li>
+        <li> Used QT Graphical interface framework to integrate cocos2d-x engine</li>
+      </ul>
+      <hr>
+    </section>
 
-  <div id="app">
+    <section>
+      <h3> Armor Game Prototype | Cocos2D-X Game Engine & Box2D Physics Engine </h3>
+      <video width="700" controls>
+        <source src="https://dl.dropboxusercontent.com/s/hdm2teokon57p63/002_Armor_Game_Prototype.mkv?dl=0"
+          type="video/mp4">
+        <source src="mov_bbb.ogg" type="video/ogg">
+        Your browser does not support HTML video.
+      </video>
+      <ul>
+        <li> The objective of this game is to reach the destination by avoiding obstacles</li>
+        <li> This Game is a replica of a game named : Armor, <a href="https://bit.ly/3HxrbMJ" target="_blank">Play
+            Store Link</a></li>
+        <li> All the shapes are generated at run time</li>
+      </ul>
+      <hr>
+    </section>
 
-    <div class="level-container">
-      <h1>Level Data Editor</h1>
+    <section>
+      <h3> 2D Car Game Prototype | Cocos2D-X Game Engine & Box2D Physics Engine </h3>
+      <video width="700" controls>
+        <source src="https://dl.dropboxusercontent.com/s/ua8xe96agktverv/003_Car_Box2D_Prototype.mkv?dl=0"
+          type="video/mp4">
+        <source src="mov_bbb.ogg" type="video/ogg">
+        Your browser does not support HTML video.
+      </video>
+      <ul>
+        <li> This project was an attempt to study Physics engine in more details </li>
+        <li> All the shapes are generated at run time</li>
+      </ul>
+      <hr>
+    </section>
 
-      <button class="button" @click="selectFiles">LOAD JSON</button>
+    <section>
+      <h3> Study of Box2D Joints | Box2D Physics Engine </h3>
+      <video width="700" controls>
+        <source src="https://dl.dropboxusercontent.com/s/pkwzux1x0uw8k4z/004_Box2D_Basic_Work_.mkv?dl=0"
+          type="video/mp4">
+        <source src="mov_bbb.ogg" type="video/ogg">
+        Your browser does not support HTML video.
+      </video>
+      <ul>
+        <li> This is a testbed work, which helps further the development of 2D physics games </li>
+        <li> All the shapes are generated at run time</li>
+      </ul>
+      <hr>
+    </section>
 
-      <select class="button button_combo " v-if="jsonFiles.length" v-model="selectedFile" @change="loadJsonContent">
-        <option v-for="file in jsonFiles" :key="file.name" :value="file.name">
-          {{ file.name }}
-        </option>
-      </select>
+    <section>
+      <h3> Tile Matching Game | Cocos2D-X Game Engine </h3>
+      <video width="700" controls>
+        <source src="https://dl.dropboxusercontent.com/s/79vxkxq00k8u9vx/005_Tile_Match_Prototype.mkv?dl=0"
+          type="video/mp4">
+        <source src="mov_bbb.ogg" type="video/ogg">
+        Your browser does not support HTML video.
+      </video>
+      <ul>
+        <li> Inspired by the Mahjong Game, developed this prototype </li>
+        <li> All the shapes are generated at run time except glossy effect</li>
+      </ul>
+      <hr>
+    </section>
 
+    <section>
+      <h3> Fidget Spinner Game Prototype | Cocos2D-X Game Engine </h3>
+      <video width="700" controls>
+        <source src="https://dl.dropboxusercontent.com/s/u17spmlb13dhfma/006_FidgetSpin_Prototype.mkv?dl=0"
+          type="video/mp4">
+        <source src="mov_bbb.ogg" type="video/ogg">
+        Your browser does not support HTML video.
+      </video>
+      <ul>
+        <li> At one time Fidget spinner games were very famous, prototyped this game to improve coding skill </li>
+      </ul>
+      <hr>
+    </section>
 
-      <div v-if="jsonContent">
-        <h2>JSON Content:</h2>
-        <pre>{{ jsonContent }}</pre>
-      </div>
+    <section>
+      <h3> Tiny Wings Game Prototype | Cocos2D-X Game Engine </h3>
+      <video width="700" controls>
+        <source src="https://dl.dropboxusercontent.com/s/6d3si5ohds7zpkp/007_TinyWingsReplica.mkv?dl=0"
+          type="video/mp4">
+        <source src="mov_bbb.ogg" type="video/ogg">
+        Your browser does not support HTML video.
+      </video>
+      <ul>
+        <li> Inspired by iOS Game Tiny Wings, prototyped this game to improve my coding skill </li>
+        <li> This project is a modified version of an open source project.</li>
+        <li>This project helped me to understand the OpenGL library</li>
+      </ul>
+      <hr>
+    </section>
 
-      <!-- <button @:click="showAlert" class="btn-primary">Show Alert</button> -->
-      <button v-if="jsonFiles.length" @:click="download_json_file" class="btn-primary button">Download JSON</button>
+    <section id="EquateMathGame">
+      <h3> Equate Tile Matching Math Game | Cocos2D-X Game Engine </h3>
+      <video width="700" controls>
+        <source src="https://dl.dropboxusercontent.com/s/tst8a7r6xb8p1wi/008_Equate_PlayStore_Game.mkv?dl=0"
+          type="video/mp4">
+        <source src="mov_bbb.ogg" type="video/ogg">
+        Your browser does not support HTML video.
+      </video>
+      <ul>
+        <li>Inspired by the Mahjong style of game, designed, developed, and released the game in AppStore & PlayStore
+        </li>
+        <li>This project helped me in understanding how to independently develop a project (from concept, prototyping,
+          re-iterating, to deployment) </li>
+        <li>This project gave me insight into Gaming Industry Market and strengthened my Gaming Foundation. </li>
+      </ul>
+      <hr>
+    </section>
 
-      <button class="button button_reload" @click="reloadFiles" v-if="jsonFiles.length">Reload Files</button>
+    <section>
+      <h3> Falling Brick Game | A Study of Unity3D Game Engine </h3>
+      <video width="700" controls>
+        <source src="https://dl.dropboxusercontent.com/s/9uk599sqsc1x7t9/009_Falling_Brick_Prototype.mkv?dl=0"
+          type="video/mp4">
+        <source src="mov_bbb.ogg" type="video/ogg">
+        Your browser does not support HTML video.
+      </video>
+      <ul>
+        <li>This project is a study of Cocos2d-x & unity3D engines, finding similarity and difference b/w engines
+        </li>
+      </ul>
+      <hr>
+    </section>
 
-      <div v-if="jsonFiles.length" v-for="(level, index) in levels" :key="index" class="level">
-        <!-- <h2>Level {{ level.level.levelIndex }}</h2> In-Batch2 -->
-         <div class="section">
-          <h3>Selected File :  <span style="color:#e60ba8">{{selectedFile}}</span></h3>
-          <hr>
-         </div>
-        <div class="section">
-          <h3>Player Settings</h3>
-          <label> Play Mode
-            <select v-model="level.player.play_mode">
-              <option value="normal">Normal</option>
-              <option value="god_mode">God Mode</option>
-            </select>
-          </label>
-          <br>
-          <br>
-          <div class="field">
-            <label>Health:</label>
-            <input type="range" v-model="level.player.health" min="0" max="100" step="1" />
-            <span>{{ level.player.health }}</span>
-          </div>
-          <div class="field">
-            <label>Turn Speed:</label>
-            <input type="range" v-model="level.player.turn_speed" min="0" max="100" step="0.1" />
-            <span>{{ level.player.turn_speed }}</span>
-          </div>
-          <div class="field">
-            <label>Forward Speed:</label>
-            <input type="range" v-model="level.player.forward_speed" min="0" max="300" step="0.1" />
-            <span>{{ level.player.forward_speed }}</span>
-          </div>
-        </div>
+    <section>
+      <h3> 2D Generative Art | Code to generate Art | Processing P5-js library</h3>
+      <video width="700" controls>
+        <source src="https://dl.dropboxusercontent.com/s/cmck6bagu11llr6/010_2D_GenerativeArt.mkv?dl=0"
+          type="video/mp4">
+        <source src="mov_bbb.ogg" type="video/ogg">
+        Your browser does not support HTML video.
+      </video>
+      <ul>
+        <li>All the images showcased in this video are generated by code</li>
+        <li>Using the knowledge of Maths and Programming any kind of image can be generated with tons of variations</li>
+        <li>This project is helping me to study & understand Geometric shapes</li>
+        <li>The video does not even showcase the 1% potential of Generative art capability</li>
+        <li>The skill developed in this area can be utilized in any game</li>
+      </ul>
+      <hr>
+    </section>
 
-        <div class="section">
-          <h3>Player Weapon Settings</h3>
-          <div class="field">
-            <label>Shooting Range:</label>
-            <input type="range" v-model="level.player.weapon.shooting_range" min="0" max="100" />
-            <span>{{ level.player.weapon.shooting_range }}</span>
-          </div>
-          <div class="field">
-            <label>Reload in Seconds:</label>
-            <input type="range" v-model="level.player.weapon.reload_in_seconds" min="0" max="100" step="0.1" />
-            <span>{{ level.player.weapon.reload_in_seconds }}</span>
-          </div>
-          <div class="field">
-            <label>Fire Rate Per Minute:</label>
-            <input type="range" v-model="level.player.weapon.fire_rate_per_min" min="0" max="300" step="0.1" />
-            <span>{{ level.player.weapon.fire_rate_per_min }}</span>
-          </div>
-        </div>
+    <section>
+      <h3> Attempt to improve 2D Skillset | Tool used : Affinity Designer</h3>
+      <video width="700" controls>
+        <source src="https://dl.dropboxusercontent.com/s/6r09eyw25n0tnx5/011_2D_Drawing_Skill.mkv?dl=0"
+          type="video/mp4">
+        <source src="mov_bbb.ogg" type="video/ogg">
+        Your browser does not support HTML video.
+      </video>
+      <ul>
+        <li>2D Drawing skill helps from concept, prototyping to polishing the final product</li>
+        <li>Learning this skill from master <a href="https://www.skillshare.com/user/aurorabyz" target="_blank">"Zaneena
+            Nabeel"</a> </li>
+        <li>As an indie developer learning to draw objects is an essential skill</li>
+        <li>This skill helps me in understanding Geometric shapes, Color theory, Scene Composition</li>
+      </ul>
+      <hr>
+    </section>
 
-        <div class="section">
-          <h3>Player Bullet Settings</h3>
-          <div class="field">
-            <label>Speed:</label>
-            <input type="range" v-model="level.player.bullet.speed" min="0" max="100" />
-            <span>{{ level.player.bullet.speed }}</span>
-          </div>
-          <div class="field">
-            <label>Damage Crate:</label>
-            <input type="range" v-model="level.player.bullet.damage.crate" min="0" max="100" step="0.1" />
-            <span>{{ level.player.bullet.damage.crate }}</span>
-          </div>
-          <div class="field">
-            <label>Damage Enemy:</label>
-            <input type="range" v-model="level.player.bullet.damage.enemy" min="0" max="300" step="0.1" />
-            <span>{{ level.player.bullet.damage.enemy }}</span>
-          </div>
-        </div>
-        <div class="section">
-          <h3>Player Bomb Drop Settings</h3>
-          <div class="field">
-            <label>Blast Radius:</label>
-            <input type="range" v-model="level.bomb.blastRadius" min="0" max="50" step="0.1" />
-            <span>{{ level.bomb.blastRadius }}</span>
-          </div>
-          <div class="field">
-            <label>Countdown to Explosion:</label>
-            <input type="range" v-model="level.bomb.countdown_to_explosion" min="0" max="60" step="0.1" />
-            <span>{{ level.bomb.countdown_to_explosion }}</span>
-          </div>
-          <div class="field">
-            <label>Max Bomb Count:</label>
-            <input type="range" v-model="level.bomb.max_bomb_count" min="0" max="20" />
-            <span>{{ level.bomb.max_bomb_count }}</span>
-          </div>
-        </div>
-        <hr>
-        <div class="section">
-          <h3>Enemy Settings</h3>
-          <div class="field">
-            <label>Health:</label>
-            <input type="range" v-model="level.enemy.health" min="0" max="100" step="1" />
-            <span>{{ level.enemy.health }}</span>
-          </div>
-          <div class="field">
-            <label>Turn Speed:</label>
-            <input type="range" v-model="level.enemy.turn_speed" min="0" max="100" step="0.1" />
-            <span>{{ level.enemy.turn_speed }}</span>
-          </div>
-          <div class="field">
-            <label>Forward Speed:</label>
-            <input type="range" v-model="level.enemy.forward_speed" min="0" max="300" step="0.1" />
-            <span>{{ level.enemy.forward_speed }}</span>
-          </div>
-        </div>
-
-        <div class="section">
-          <h3>Enemy Weapon Settings</h3>
-          <div class="field">
-            <label>Shooting Range:</label>
-            <input type="range" v-model="level.enemy.weapon.shooting_range" min="0" max="100" />
-            <span>{{ level.enemy.weapon.shooting_range }}</span>
-          </div>
-          <div class="field">
-            <label>Reload in Seconds:</label>
-            <input type="range" v-model="level.enemy.weapon.reload_in_seconds" min="0" max="100" step="0.1" />
-            <span>{{ level.enemy.weapon.reload_in_seconds }}</span>
-          </div>
-          <div class="field">
-            <label>Fire Rate Per Minute:</label>
-            <input type="range" v-model="level.enemy.weapon.fire_rate_per_min" min="0" max="300" step="0.1" />
-            <span>{{ level.enemy.weapon.fire_rate_per_min }}</span>
-          </div>
-        </div>
-
-        <div class="section">
-          <h3>Enemy Bullet Settings</h3>
-          <div class="field">
-            <label>Speed:</label>
-            <input type="range" v-model="level.enemy.bullet.speed" min="0" max="100" />
-            <span>{{ level.enemy.bullet.speed }}</span>
-          </div>
-          <div class="field">
-            <label>Damage Crate:</label>
-            <input type="range" v-model="level.enemy.bullet.damage.crate" min="0" max="100" step="0.1" />
-            <span>{{ level.enemy.bullet.damage.crate }}</span>
-          </div>
-          <div class="field">
-            <label>Damage Enemy:</label>
-            <input type="range" v-model="level.enemy.bullet.damage.enemy" min="0" max="300" step="0.1" />
-            <span>{{ level.enemy.bullet.damage.enemy }}</span>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="section">
-          <h3>Missiles: Settings</h3>
-          <div class="field">
-            <label>Health:</label>
-            <input type="range" v-model="level.missile.health" min="0" max="100" />
-            <span>{{ level.missile.health }}</span>
-          </div>
-          <div class="field">
-            <label>Countdown To Launch</label>
-            <input type="range" v-model="level.missile.countdown_to_launch" min="0" max="100" step="0.1" />
-            <span>{{ level.missile.countdown_to_launch }}</span>
-          </div>
-          <div class="field">
-            <label>Max Count:</label>
-            <input type="range" v-model="level.missile.max_count" min="0" max="300" step="0.1" />
-            <span>{{ level.missile.max_count }}</span>
-          </div>
-        </div>
-
-        <hr>
-
-        <div class="section">
-          <h3>Camera Settings</h3>
-          <div class="field">
-            <label>FOV:</label>
-            <input type="range" v-model="level.camera.fov" min="0" max="100" />
-            <span>{{ level.camera.fov }}</span>
-          </div>
-          <div class="field">
-            <label>Position X:</label>
-            <input type="number" v-model="level.camera.position[0]" />
-          </div>
-          <div class="field">
-            <label>Position Y:</label>
-            <input type="number" v-model="level.camera.position[1]" />
-          </div>
-          <div class="field">
-            <label>Position Z:</label>
-            <input type="number" v-model="level.camera.position[2]" />
-          </div>
-        </div>
-
-        <hr>
-        <div class="section">
-          <h3>Level Settings</h3>
-          <div class="field">
-            <label>Max Height:</label>
-            <input type="range" v-model="level.level_details.max_height" min="0" max="100" />
-            <span>{{ level.level_details.max_height }}</span>
-          </div>
-          <div class="field">
-            <label>Left Limit:</label>
-            <input type="number" v-model="level.level_details.left_limit_x" />
-          </div>
-          <div class="field">
-            <label>Right Limit:</label>
-            <input type="number" v-model="level.level_details.right_limit_x" />
-          </div>
-
-          <div class="field">
-            <label>Level Name:</label>
-            <input type="text" placeholder="Level Name" required v-model="level.level_details.name" />
-          </div>
-          <div>
-            <label> Difficulty Mode
-              <select v-model="level.level_details.difficulty">
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-              </select>
-            </label>
-          </div>
-        </div>
-
-
-      </div>
-
-
-
-
-      <!-- Taking up this in batch-2 
-        <div class="section">
-          <h3>Level Objectives</h3>
-          <textarea v-model="level.level.objective.join('\n')" rows="4"></textarea>
-        </div>
-
-        <div class="section">
-          <h3>Level Rewards</h3>
-          <div class="field">
-            <label>Coins:</label>
-            <input type="number" v-model="level.level.reward.coins" />
-          </div>
-          <div class="field">
-            <label>Gems:</label>
-            <input type="number" v-model="level.level.reward.gems" />
-          </div>
-        </div>
-        <div class="section">
-          <h3>Play Mode To-Do</h3>
-        </div>
-        -->
-
-    </div>
+    <section>
+      <h3> Attempt to improve 3D Skillset | Tool used : Blender</h3>
+      <video width="700" controls>
+        <source src="https://dl.dropboxusercontent.com/s/8inuxwpo3z8q3tj/012_3D_Modelling_Skillset.mkv?dl=0"
+          type="video/mp4">
+        <source src="mov_bbb.ogg" type="video/ogg">
+        Your browser does not support HTML video.
+      </video>
+      <ul>
+        <li>Like 2D Drawing, 3D modeling skill also helps in concept, prototyping & polishing the final product</li>
+        <li>As an indie developer learning to model objects is an essential skill</li>
+        <li>This skill helps me in understanding Geometric shapes, Perspective & Orthogonal projections & Scene
+          Composition</li>
+      </ul>
+      <hr>
+    </section>
   </div>
-  </div>
-
-  <script src="https://unpkg.com/vue@3"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-  <script>
-    const level_data = Vue.createApp({
-      data() {
-        return {
-          jsonFiles: [],
-          selectedFile: '',
-          jsonData: null,
-          "levels": [
-            {
-              "player": {
-                "health": 100,
-                "turn_speed": 30.6,
-                "forward_speed": 200.6,
-                "weapon": {
-                  "shooting_range": 100.0,
-                  "reload_in_seconds": 4.0,
-                  "fire_rate_per_min": 5.0
-                },
-                "bullet": {
-                  "speed": 100.0,
-                  "damage": {
-                    "crate": 3.0,
-                    "enemy": 6.0
-                  }
-                },
-                "play_mode": "normal"
-              },
-              "enemy": {
-                "health": 100,
-                "turn_speed": 30.6,
-                "forward_speed": 200.6,
-                "weapon": {
-                  "shooting_range": 100.0,
-                  "reload_in_seconds": 4.0,
-                  "fire_rate_per_min": 5.0
-                },
-                "bullet": {
-                  "speed": 100.0,
-                  "damage": {
-                    "crate": 3.0,
-                    "enemy": 6.0
-                  }
-                }
-              },
-              "bomb": {
-                "blastRadius": 10.0,
-                "countdown_to_explosion": 10.0,
-                "max_bomb_count": 10
-              },
-              "missile": {
-                "health": 100,
-                "countdown_to_launch": 50,
-                "max_count": 5
-              },
-              "camera": {
-                "fov": 50,
-                "position": [10.5, 45.6, -45.0]
-              },
-              "level_details": {
-                "level_id": "level_?",
-                "name": "Mystic Forest",
-                "left_limit_x": -1000,
-                "right_limit_x": 1000,
-                "max_height": 50,
-                "difficulty": "medium"
-              } /* Taking the below section in Batch-2 ,
-              level: {
-                levelIndex: 1,
-                objective: [
-                  "Collect 10 coins",
-                  "Destroy All Enemies",
-                  "Complete Level in 5 min"
-                ],
-                reward: {
-                  coins: 50,
-                  gems: 100,
-                }
-              } */
-            }
-          ]
-        }
-      },
-      methods: {
-        selectFiles() {
-          const input = document.createElement('input');
-          input.type = 'file';
-          input.accept = '.json'; // Allow only JSON files
-          input.multiple = true; // Allow multiple file selection
-
-          input.onchange = (event) => {
-            this.jsonFiles = Array.from(event.target.files);
-            this.selectedFile = this.jsonFiles.length ? this.jsonFiles[0].name : null;
-            if (this.selectedFile) {
-              this.loadJsonContent();
-            }
-          };
-
-          input.click(); // Open the file explorer
-        },
-        reloadFiles() {
-          this.jsonFiles = [];
-          this.selectFiles(); // Reopen file dialog to select files again
-        },
-        loadJsonContent() {
-
-          const file = this.jsonFiles.find(f => f.name === this.selectedFile);
-          if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-              this.levels = JSON.parse(e.target.result); // Load JSON content
-            };
-            reader.readAsText(file);
-          }
-        },
-        showAlert() {
-          Swal.fire({
-            title: 'Error!',
-            text: 'Do you want to continue',
-            icon: 'error',
-            confirmButtonText: 'Cool'
-          })
-        }
-        ,
-        toFloat(value) {
-          return Number(value);
-        },
-
-        toInt(value) {
-          return Math.floor(value);
-        },
-
-        download_json_file() {
-          const player = this.levels[0].player;
-          //{
-          //player.play_mode = player.play_mode
-          player.health = this.toFloat(player.health)
-          player.forward_speed = this.toFloat(player.forward_speed)
-          player.turn_speed = this.toFloat(player.turn_speed)
-          player.weapon.shooting_range = this.toFloat(player.weapon.shooting_range)
-          player.weapon.reload_in_seconds = this.toFloat(player.weapon.reload_in_seconds)
-          player.weapon.fire_rate_per_min = this.toFloat(player.weapon.fire_rate_per_min);
-          player.bullet.speed = this.toFloat(player.bullet.speed);
-          player.bullet.damage.crate = this.toFloat(player.bullet.damage.crate);
-          player.bullet.damage.enemy = this.toFloat(player.bullet.damage.enemy);
-          //}
-          this.levels[0].player = player;
-
-          const enemy = this.levels[0].enemy;
-          //{
-          enemy.health = this.toFloat(enemy.health)
-          enemy.forward_speed = this.toFloat(enemy.forward_speed)
-          enemy.turn_speed = this.toFloat(enemy.turn_speed)
-          enemy.weapon.shooting_range = this.toFloat(enemy.weapon.shooting_range)
-          enemy.weapon.reload_in_seconds = this.toFloat(enemy.weapon.reload_in_seconds)
-          enemy.weapon.fire_rate_per_min = this.toFloat(enemy.weapon.fire_rate_per_min);
-          enemy.bullet.speed = this.toFloat(enemy.bullet.speed);
-          enemy.bullet.damage.crate = this.toFloat(enemy.bullet.damage.crate);
-          enemy.bullet.damage.enemy = this.toFloat(enemy.bullet.damage.enemy);
-          //}
-          this.levels[0].enemy = enemy;
-
-          const bomb = this.levels[0].bomb;
-          //{
-          bomb.blastRadius = this.toFloat(bomb.blastRadius)
-          bomb.countdown_to_explosion = this.toFloat(bomb.countdown_to_explosion)
-          bomb.max_bomb_count = this.toInt(bomb.max_bomb_count)
-          //}
-          this.levels[0].bomb = bomb;
-
-          const missile = this.levels[0].missile;
-          //{
-          missile.health = this.toFloat(missile.health)
-          missile.countdown_to_launch = this.toFloat(missile.countdown_to_launch)
-          missile.max_count = this.toInt(missile.max_count)
-          //}
-          this.levels[0].missile = missile;
-
-          const camera = this.levels[0].camera;
-
-          camera.fov = this.toFloat(camera.fov)
-          camera.position[0] = this.toFloat(camera.position[0])
-          camera.position[1] = this.toFloat(camera.position[1])
-          camera.position[2] = this.toFloat(camera.position[2])
-
-          this.levels[0].missile = missile;
-
-
-
-          const jsonString = JSON.stringify(this.levels, null, 2);
-          const blob = new Blob([jsonString], { type: 'application/json' });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = this.selectedFile;
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          URL.revokeObjectURL(url);
-        }
-      }
-    }).mount('#app');
-  </script>
 </body>
 
 </html>
