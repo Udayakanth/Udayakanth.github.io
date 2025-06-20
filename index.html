@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,36 +5,199 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Game Development Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    #wrap {
-      max-width: 800px;
-      margin: auto;
+    /* Base styles and variables */
+    :root {
+      --primary-orange: #FF7F27;
+      --secondary-orange: #FF9C5B;
+      --light-orange: #FFE5D0;
+      --dark-orange: #D66000;
+      --text-dark: #333333;
+      --text-light: #666666;
+      --white: #FFFFFF;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 12px rgba(255, 127, 39, 0.15);
     }
 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background-color: #FAFAFA;
+      padding: 20px 0;
+    }
+
+    #wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    /* Typography */
     h2 {
-      background-color: aliceblue;
+      background-color: var(--primary-orange);
+      color: var(--white);
       text-align: center;
-      font-size: xx-large;
+      font-size: 1.4rem;
+      padding: 18px 15px;
+      margin-bottom: 30px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      font-weight: 600;
+      letter-spacing: 1px;
     }
 
     h3 {
-      background-color: aliceblue;
+      background-color: var(--light-orange);
+      color: var(--dark-orange);
       text-align: left;
-      font-size: large;
-      max-width: 600px;
+      font-size: 1.0rem;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border-left: 5px solid var(--primary-orange);
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+      max-width: 100%;
+      font-weight: 500;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 40px;
+      padding: 20px;
+      border: 1px solid var(--secondary-orange);
+      border-radius: var(--border-radius);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      background-color: var(--white);
+    }
+
+    section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 127, 39, 0.2);
+    }
+
+    /* Video container */
+    video {
+      width: 100%;
+      max-width: 700px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      margin: 0 auto 20px;
+      display: block;
+      border: 2px solid var(--secondary-orange);
+    }
+
+    /* Lists */
+    ul {
+      list-style-type: none;
+      padding-left: 20px;
+      margin-bottom: 15px;
     }
 
     li {
-      font-size: larger;
+      font-size: 1.05rem;
+      margin-bottom: 12px;
+      padding-left: 25px;
+      position: relative;
+      color: var(--text-light);
     }
 
-    section {
-      max-width: 900px;
+    li::before {
+      content: "•";
+      color: var(--primary-orange);
+      font-size: 1.5rem;
+      position: absolute;
+      left: 0;
+      top: -2px;
     }
 
+    /* Links */
+    a {
+      color: var(--dark-orange);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      border-bottom: 1px dashed var(--secondary-orange);
+      padding-bottom: 2px;
+    }
+
+    a:hover {
+      color: var(--primary-orange);
+      border-bottom: 1px solid var(--primary-orange);
+    }
+
+    /* Dividers */
     hr {
-      margin-bottom: 30px;
+      margin: 30px 0;
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--secondary-orange), transparent);
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      #wrap {
+        padding: 15px;
+      }
+
+      h2 {
+        font-size: 1.8rem;
+        padding: 15px 10px;
+      }
+
+      h3 {
+        font-size: 1.1rem;
+        padding: 10px;
+      }
+
+      section {
+        padding: 15px;
+      }
+
+      li {
+        font-size: 1rem;
+      }
+
+      video {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      h3 {
+        font-size: 1rem;
+      }
+
+      section {
+        padding: 12px;
+      }
+
+      li {
+        font-size: 0.95rem;
+        padding-left: 20px;
+      }
+    }
+    h4 {
+      margin: 10px;
+      color: #D66000;
+      ;
     }
   </style>
 </head>
@@ -44,9 +205,11 @@
 <body>
   <div id="wrap">
     <h2>Independent & Dham's Inc Collaboration</h2>
+    <h4>Showcases of Prototypes, Art, 3D Modelling, Games, Tools </h4>
+
     <section id="ParticleEditorTool">
       <h3>Particle Editor Tool | Cocos2D-X Game Engine | QT GUI Framework </h3>
-      <video width="700" controls>
+      <video controls>
         <source src="https://dl.dropboxusercontent.com/s/ad28710trga6tb6/001_Particle_Editor.mp4?dl=0" type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
         Your browser does not support HTML video.
@@ -60,7 +223,7 @@
 
     <section>
       <h3> Armor Game Prototype | Cocos2D-X Game Engine & Box2D Physics Engine </h3>
-      <video width="700" controls>
+      <video controls>
         <source src="https://dl.dropboxusercontent.com/s/hdm2teokon57p63/002_Armor_Game_Prototype.mkv?dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
@@ -77,7 +240,7 @@
 
     <section>
       <h3> 2D Car Game Prototype | Cocos2D-X Game Engine & Box2D Physics Engine </h3>
-      <video width="700" controls>
+      <video controls>
         <source src="https://dl.dropboxusercontent.com/s/ua8xe96agktverv/003_Car_Box2D_Prototype.mkv?dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
@@ -92,7 +255,7 @@
 
     <section>
       <h3> Study of Box2D Joints | Box2D Physics Engine </h3>
-      <video width="700" controls>
+      <video controls>
         <source src="https://dl.dropboxusercontent.com/s/pkwzux1x0uw8k4z/004_Box2D_Basic_Work_.mkv?dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
@@ -107,7 +270,7 @@
 
     <section>
       <h3> Tile Matching Game | Cocos2D-X Game Engine </h3>
-      <video width="700" controls>
+      <video controls>
         <source src="https://dl.dropboxusercontent.com/s/79vxkxq00k8u9vx/005_Tile_Match_Prototype.mkv?dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
@@ -122,7 +285,7 @@
 
     <section>
       <h3> Fidget Spinner Game Prototype | Cocos2D-X Game Engine </h3>
-      <video width="700" controls>
+      <video controls>
         <source src="https://dl.dropboxusercontent.com/s/u17spmlb13dhfma/006_FidgetSpin_Prototype.mkv?dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
@@ -136,7 +299,7 @@
 
     <section>
       <h3> Tiny Wings Game Prototype | Cocos2D-X Game Engine </h3>
-      <video width="700" controls>
+      <video controls>
         <source src="https://dl.dropboxusercontent.com/s/6d3si5ohds7zpkp/007_TinyWingsReplica.mkv?dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
@@ -239,13 +402,16 @@
     <section>
       <h3> Prototype | Drag To Destination-1</h3>
       <video width="700" controls>
-        <source src="https://dl.dropboxusercontent.com/scl/fi/igmy1fqce8kz1mcl1ufo1/Drag-and-drop-to-destination-1.mp4?rlkey=ikldgmajt1a11jjb2adqp39ue&st=f24q6ey3&dl=0"
+        <source
+          src="https://dl.dropboxusercontent.com/scl/fi/igmy1fqce8kz1mcl1ufo1/Drag-and-drop-to-destination-1.mp4?rlkey=ikldgmajt1a11jjb2adqp39ue&st=f24q6ey3&dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
         Your browser does not support HTML video.
       </video>
       <ul>
-        <li>Its a unity3D prototype, the objective of this mini game is to move a shape to its destination ( based on size and shape )</li>
+        <li>Its a unity3D prototype, the objective of this mini game is to move a shape to its destination ( based on
+          size
+          and shape )</li>
       </ul>
       <hr>
     </section>
@@ -253,13 +419,15 @@
     <section>
       <h3> Prototype | Drag To Destination-2</h3>
       <video width="700" controls>
-        <source src="https://dl.dropboxusercontent.com/scl/fi/56iqzhwmcuxwqizo9j5ap/Drag-and-drop-to-destination-2.mp4?rlkey=5inuwxuqzvfy25zutkeuuf77n&st=9rcmodfe&dl=0"
+        <source
+          src="https://dl.dropboxusercontent.com/scl/fi/56iqzhwmcuxwqizo9j5ap/Drag-and-drop-to-destination-2.mp4?rlkey=5inuwxuqzvfy25zutkeuuf77n&st=9rcmodfe&dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
         Your browser does not support HTML video.
       </video>
       <ul>
-        <li>Its a unity3D prototype, the objective of this mini game is to identify the shape and its respective shadow image and move it to destination </li>
+        <li>Its a unity3D prototype, the objective of this mini game is to identify the shape and its respective shadow
+          image and move it to destination </li>
       </ul>
       <hr>
     </section>
@@ -267,13 +435,15 @@
     <section>
       <h3> Prototype | Drag To Destination-3</h3>
       <video width="700" controls>
-        <source src="https://dl.dropboxusercontent.com/scl/fi/3yxueabp2gw9d84y8868u/Drag-and-drop-to-destination-3.mp4?rlkey=pxgsgcxmwjkptndtazp45fb5z&st=vnmymqd1&dl=0"
+        <source
+          src="https://dl.dropboxusercontent.com/scl/fi/3yxueabp2gw9d84y8868u/Drag-and-drop-to-destination-3.mp4?rlkey=pxgsgcxmwjkptndtazp45fb5z&st=vnmymqd1&dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
         Your browser does not support HTML video.
       </video>
       <ul>
-        <li>Its a unity3D prototype, the objective of this mini game is to identify the number and its respective placeholder place and move it to destination </li>
+        <li>Its a unity3D prototype, the objective of this mini game is to identify the number and its respective
+          placeholder place and move it to destination </li>
       </ul>
       <hr>
     </section>
@@ -281,13 +451,15 @@
     <section>
       <h3> Prototype | Tap to rotate and match the destination angle (orientation) </h3>
       <video width="700" controls>
-        <source src="https://dl.dropboxusercontent.com/scl/fi/b73c2lkn4zfz3lujgf3b1/Tap-To-Rotate-and-Match.mp4?rlkey=2b5d3eyb5exiz8n3rzs98fw40&st=mjlgeb5b&dl=0"
+        <source
+          src="https://dl.dropboxusercontent.com/scl/fi/b73c2lkn4zfz3lujgf3b1/Tap-To-Rotate-and-Match.mp4?rlkey=2b5d3eyb5exiz8n3rzs98fw40&st=mjlgeb5b&dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
         Your browser does not support HTML video.
       </video>
       <ul>
-        <li>Its a unity3D prototype, the objective of this mini game is to rotate the object by tapping to match it to destination object's orientation. </li>
+        <li>Its a unity3D prototype, the objective of this mini game is to rotate the object by tapping to match it to
+          destination object's orientation. </li>
       </ul>
       <hr>
     </section>
@@ -295,13 +467,16 @@
     <section>
       <h3> Prototype | Its a replica of Tile Match Mahjong game </h3>
       <video width="700" controls>
-        <source src="https://dl.dropboxusercontent.com/scl/fi/819ju93w8j7cgvk8j72od/Tile-Match-Mahjong.mp4?rlkey=krb5d7cgunelo94nt01zmxeb4&st=ajybshxp&dl=0"
+        <source
+          src="https://dl.dropboxusercontent.com/scl/fi/819ju93w8j7cgvk8j72od/Tile-Match-Mahjong.mp4?rlkey=krb5d7cgunelo94nt01zmxeb4&st=ajybshxp&dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
         Your browser does not support HTML video.
       </video>
       <ul>
-        <li>Its a unity3D prototype, Its a replica of Tile Match Mahjong game, the objective is to clear all the matching tiles </li>
+        <li>Its a unity3D prototype, Its a replica of Tile Match Mahjong game, the objective is to clear all the
+          matching
+          tiles </li>
       </ul>
       <hr>
     </section>
@@ -309,7 +484,8 @@
     <section>
       <h3> Prototype | Tried repliating bowling game </h3>
       <video width="700" controls>
-        <source src="https://dl.dropboxusercontent.com/scl/fi/jiezxh28vf8t7m3v3ri6v/Bowling-Game.mp4?rlkey=04vbmj7kqzyj71658io73wy49&st=4wymewjp&dl=0"
+        <source
+          src="https://dl.dropboxusercontent.com/scl/fi/jiezxh28vf8t7m3v3ri6v/Bowling-Game.mp4?rlkey=04vbmj7kqzyj71658io73wy49&st=4wymewjp&dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
         Your browser does not support HTML video.
@@ -320,24 +496,28 @@
       <hr>
     </section>
 
-      <section>
+    <section>
       <h3> Prototype | Another Tile matching game with 3D tiles and 2d images </h3>
       <video width="700" controls>
-        <source src="https://dl.dropboxusercontent.com/scl/fi/skbp6gxyv3epflc5r1mue/Tile-Matching-Game-2.mp4?rlkey=rlsww23yzyagb1emg3u9ag9sf&st=eytl3qko&dl=0"
+        <source
+          src="https://dl.dropboxusercontent.com/scl/fi/skbp6gxyv3epflc5r1mue/Tile-Matching-Game-2.mp4?rlkey=rlsww23yzyagb1emg3u9ag9sf&st=eytl3qko&dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
         Your browser does not support HTML video.
       </video>
       <ul>
-        <li> Its a unity3D prototype, Its a replica of tile matching game, the objective is to clear all the matching tiles  </li>
+        <li> Its a unity3D prototype, Its a replica of tile matching game, the objective is to clear all the matching
+          tiles
+        </li>
       </ul>
       <hr>
     </section>
 
-      <section>
+    <section>
       <h3> Prototype | Tried replicating Flappy Bird game in 3D </h3>
       <video width="700" controls>
-        <source src="https://dl.dropboxusercontent.com/scl/fi/6hkwq6d3e58s3shjyftux/Flappy-Birds.mp4?rlkey=hox1q4ui2vz7x28a6c4uk0h1z&st=n0d1x807&dl=0"
+        <source
+          src="https://dl.dropboxusercontent.com/scl/fi/6hkwq6d3e58s3shjyftux/Flappy-Birds.mp4?rlkey=hox1q4ui2vz7x28a6c4uk0h1z&st=n0d1x807&dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
         Your browser does not support HTML video.
@@ -348,24 +528,28 @@
       <hr>
     </section>
 
-      <section>
+    <section>
       <h3> Prototype | Tried implementing basket ball mini game </h3>
       <video width="700" controls>
-        <source src="https://dl.dropboxusercontent.com/scl/fi/3p08mcq6c4tp23evelcoj/Basket-Ball-Game.mp4?rlkey=cffmiu8mus3u97hwfiaq9r98u&st=qbmlypbd&dl=0"
+        <source
+          src="https://dl.dropboxusercontent.com/scl/fi/3p08mcq6c4tp23evelcoj/Basket-Ball-Game.mp4?rlkey=cffmiu8mus3u97hwfiaq9r98u&st=qbmlypbd&dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
         Your browser does not support HTML video.
       </video>
       <ul>
-        <li> Its a unity3D prototype, the objective is to throw the ball to basket, all the animations are mathematically done. </li>
+        <li> Its a unity3D prototype, the objective is to throw the ball to basket, all the animations are
+          mathematically
+          done. </li>
       </ul>
       <hr>
     </section>
 
-      <section>
+    <section>
       <h3> Prototype | Tried implementing Sname Game</h3>
       <video width="700" controls>
-        <source src="https://dl.dropboxusercontent.com/scl/fi/toce5wqb5p3h9pu3drgz1/Snake-Game.mp4?rlkey=cqsw2g63b7rdft8kcy5u38ddu&st=mhzwlrt0&dl=0"
+        <source
+          src="https://dl.dropboxusercontent.com/scl/fi/toce5wqb5p3h9pu3drgz1/Snake-Game.mp4?rlkey=cqsw2g63b7rdft8kcy5u38ddu&st=mhzwlrt0&dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
         Your browser does not support HTML video.
@@ -379,7 +563,8 @@
     <section>
       <h3> Prototype | Tried implementing Mini Car Game</h3>
       <video width="700" controls>
-        <source src="https://dl.dropboxusercontent.com/scl/fi/7idg5wgt4ah55yu4fnxvh/Car-with-tracks.mp4?rlkey=1hfh0xcatb7kmkooqunbqmniv&st=nscr0fpe&dl=0"
+        <source
+          src="https://dl.dropboxusercontent.com/scl/fi/7idg5wgt4ah55yu4fnxvh/Car-with-tracks.mp4?rlkey=1hfh0xcatb7kmkooqunbqmniv&st=nscr0fpe&dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
         Your browser does not support HTML video.
@@ -393,7 +578,8 @@
     <section>
       <h3> Prototype | Tried implementing Mini Flight Game</h3>
       <video width="700" controls>
-        <source src="https://dl.dropboxusercontent.com/scl/fi/edh6djw1krj90kfzzxvcp/Flight-Game.mp4?rlkey=yvb0i92uqnrmkg6hku1pux8q1&st=ap9fpkcp&dl=0"
+        <source
+          src="https://dl.dropboxusercontent.com/scl/fi/edh6djw1krj90kfzzxvcp/Flight-Game.mp4?rlkey=yvb0i92uqnrmkg6hku1pux8q1&st=ap9fpkcp&dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
         Your browser does not support HTML video.
@@ -407,7 +593,8 @@
     <section>
       <h3> Prototype | Tried implementing Procedural Mountain Generator</h3>
       <video width="700" controls>
-        <source src="https://dl.dropboxusercontent.com/scl/fi/y7s4kdiwwt8lrk5h829tw/Terrain_Generation.mp4?rlkey=xloiq19hu0fvxb5pkc0xbthec&st=2q5fbzol&dl=0"
+        <source
+          src="https://dl.dropboxusercontent.com/scl/fi/y7s4kdiwwt8lrk5h829tw/Terrain_Generation.mp4?rlkey=xloiq19hu0fvxb5pkc0xbthec&st=2q5fbzol&dl=0"
           type="video/mp4">
         <source src="mov_bbb.ogg" type="video/ogg">
         Your browser does not support HTML video.
@@ -421,17 +608,19 @@
     <section>
       <h3> Prototype | Tried implementing Webpage to dynamically change and store value in json file</h3>
       <video width="700" controls>
-        <source src="https://dl.dropboxusercontent.com/scl/fi/aojhg65vnnosw411tklmb/Level-Data-Streamline.mp4?rlkey=8kpra36j4ybwliv0eqsfgiv6y&st=y3q5ola2&dl=0" 
-        <source src="mov_bbb.ogg" type="video/ogg">
+        <source
+          src="https://dl.dropboxusercontent.com/scl/fi/aojhg65vnnosw411tklmb/Level-Data-Streamline.mp4?rlkey=8kpra36j4ybwliv0eqsfgiv6y&st=y3q5ola2&dl=0"
+          <source src="mov_bbb.ogg" type="video/ogg">
         Your browser does not support HTML video.
       </video>
       <ul>
-        <li> Its a Webpage prototype for changing data using web interface and saving data in json format, the idea is to use this web interface to dynmically change object's values at run time. </li>
+        <li> Its a Webpage prototype for changing data using web interface and saving data in json format, the idea is
+          to
+          use this web interface to dynmically change object's values at run time. </li>
       </ul>
       <hr>
     </section>
-    
-    
+
   </div>
 </body>
 
